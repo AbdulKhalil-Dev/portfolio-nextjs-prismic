@@ -1,5 +1,5 @@
 import { KeyTextField, LinkField } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import clsx from "clsx";
 import { MdCallMade } from "react-icons/md";
 

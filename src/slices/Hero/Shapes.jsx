@@ -40,6 +40,7 @@ function Geometries() {
       new Audio("/sounds/knock2.ogg"),
       new Audio("/sounds/knock3.ogg"),
     ];
+    soundEffectsRef.current.forEach(audio => audio.volume = 0.3);
   }, []);
 
   // Pass to Geometry

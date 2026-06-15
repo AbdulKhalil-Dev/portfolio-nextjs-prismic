@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-[#130f40] text-slate-100 scroll-smooth">
-      <body className={urbanist.className}>
+      <body className={urbanist.className} suppressHydrationWarning>
         <Header />
         {children}
       </body>
