@@ -162,22 +162,22 @@ const SHAPES_DATA = [
 const MATERIALS_DATA = [
   new THREE.MeshNormalMaterial(),
   new THREE.MeshStandardMaterial({
-    color: 0x2ecc71,
+    color: 0xff007f,
     roughness: 0,
     metalness: 0.1,
   }),
   new THREE.MeshStandardMaterial({
-    color: 0xbe2edd,
+    color: 0xfab1a0,
     roughness: 0.4,
     metalness: 0.2,
   }),
   new THREE.MeshStandardMaterial({
-    color: 0xf6e58d,
+    color: 0xf1c40f,
     roughness: 0.1,
     metalness: 0.3,
   }),
   new THREE.MeshStandardMaterial({
-    color: 0xd63031,
+    color: 0x4cd137,
     roughness: 0.1,
     metalness: 0.2,
   }),
@@ -189,11 +189,11 @@ const MATERIALS_DATA = [
   new THREE.MeshStandardMaterial({
     roughness: 0,
     metalness: 0.3,
-    color: 0xFFC312,
+    color: 0xb5ff00,
   }),
   new THREE.MeshStandardMaterial({
-    color: 0x30336b,
+    color: 0x00f3ff,
     roughness: 0.1,
-    metalness: 0.7,
+    metalness: 0.3,
   }),
 ];
