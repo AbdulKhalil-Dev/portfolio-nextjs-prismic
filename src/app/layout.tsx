@@ -3,6 +3,7 @@ import { Urbanist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import CustomCursor from "@/components/CustomCursor";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -27,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#130f40] text-slate-100 scroll-smooth">
       <body className={urbanist.className} suppressHydrationWarning>
+        <CustomCursor />
         <ScrollIndicator/>
         <Header />
         {children}
+        <div className="h-[500vh]"></div>
       </body>
     </html>
   );

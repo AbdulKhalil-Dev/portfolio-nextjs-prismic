@@ -17,6 +17,9 @@ export default function Shapes() {
         camera={{ position: [0, 0, 25], fov: 30, near: 1, far: 40 }}
       >
         <Suspense fallback={null}>
+          <ambientLight intensity={0.6} /> 
+          <directionalLight position={[10, 15, 10]} intensity={1.5} castShadow />
+
           <Geometries />
           <ContactShadows
             position={[0, -3.5, 0]}
@@ -32,15 +35,17 @@ export default function Shapes() {
   );
 }
 function Geometries() {
-  const soundEffectsRef = useRef([]);
+  const soundEffectsRef = useRef<HTMLAudioElement[]>([]);
 
   useEffect(() => {
-    soundEffectsRef.current = [
-      new Audio("/sounds/knock1.ogg"),
-      new Audio("/sounds/knock2.ogg"),
-      new Audio("/sounds/knock3.ogg"),
-    ];
-    soundEffectsRef.current.forEach(audio => audio.volume = 0.3);
+    if (typeof window !== "undefined") {
+      soundEffectsRef.current = [
+        new Audio("/sounds/knock1.ogg"),
+        new Audio("/sounds/knock2.ogg"),
+        new Audio("/sounds/knock3.ogg"),
+      ];
+      soundEffectsRef.current.forEach((audio) => (audio.volume = 0.3));
+    }
   }, []);
 
   // Pass to Geometry
@@ -164,11 +169,11 @@ const MATERIALS_DATA = [
   new THREE.MeshStandardMaterial({
     color: 0xff007f,
     roughness: 0,
-    metalness: 0.1,
+    metalness: 0.2,
   }),
   new THREE.MeshStandardMaterial({
     color: 0xfab1a0,
-    roughness: 0.4,
+    roughness: 0.1,
     metalness: 0.2,
   }),
   new THREE.MeshStandardMaterial({
