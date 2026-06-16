@@ -15,7 +15,6 @@ export default function ScrollIndicator() {
     const ctx = gsap.context(() => {
       gsap.to(progressBarRef.current, {
         scaleX: 1,
-        opacity: 1,
         ease: "none",
         scrollTrigger: {
           trigger: "html",
@@ -30,11 +29,11 @@ export default function ScrollIndicator() {
   }, []);
 
   return (
-    <div className="fixed top-1.5 left-4 right-4 z-50 h-1 rounded-full bg-white/5 md:left-12 md:right-12">
+    <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-white/5 backdrop-blur-sm">
       <div
         ref={progressBarRef}
-        className="h-full w-full origin-left rounded-full bg-gradient-to-r from-[#39ff14] via-[#00f3ff] to-[#9d00ff] shadow-[0_0_10px_rgba(0,243,255,0.6)]"
-        style={{ transform: "scaleX(0)" , opacity: 0 }}
+        className="h-full w-full origin-left bg-gradient-to-r from-[#39ff14] via-[#00f3ff] to-[#9d00ff] shadow-[0_0_10px_rgba(0,243,255,0.6)]"
+        style={{ transform: "scaleX(0)" }}
       />
     </div>
   );

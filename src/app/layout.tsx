@@ -32,7 +32,6 @@ export default function RootLayout({
         <ScrollIndicator/>
         <Header />
         {children}
-        <div className="h-[500vh]"></div>
       </body>
     </html>
   );
