@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     description: "Creative Developer crafting interactive 3D web experiences and Next.js applications.",
     images: ["/og-image.png"],
   },
+  other: {
+    google: "notranslate",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#130f40] text-slate-100 scroll-smooth">
+    <html lang="en" translate="no" className="bg-[#130f40] text-slate-100 scroll-smooth">
       <body className={urbanist.className} suppressHydrationWarning>
         <LoadingBar />
         <CustomCursor />

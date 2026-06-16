@@ -2,7 +2,7 @@ import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
+import { FC } from "react";
 
 /**
  * Props for `ContentIndex`.
