@@ -31,7 +31,7 @@ const TechList: FC<TechListProps> = ({ slice }) => {
           trigger: components.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 5,
+          scrub: 4,
         },
       });
 
@@ -65,7 +65,7 @@ const TechList: FC<TechListProps> = ({ slice }) => {
       ref={components}
     >
       <Bounded as="div">
-        <Heading size="xl" className="mb-6" as="h2">
+        <Heading size="xl" className="mb-8" as="h2">
           {slice.primary.heading}
         </Heading>
       </Bounded>
