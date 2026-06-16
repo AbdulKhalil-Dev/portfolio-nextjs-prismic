@@ -1,9 +1,9 @@
 "use client";
 
 import * as THREE from "three";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, ThreeEvent } from "@react-three/fiber";
 import { ContactShadows, Float, Environment } from "@react-three/drei";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 export default function Shapes() {
@@ -34,6 +34,7 @@ export default function Shapes() {
     </div>
   );
 }
+
 function Geometries() {
   const soundEffectsRef = useRef<HTMLAudioElement[]>([]);
 
@@ -48,32 +49,72 @@ function Geometries() {
     }
   }, []);
 
-  // Pass to Geometry
-  return SHAPES_DATA.map(({ position, r, geometry }) => {
+  const { geometries, materials } = useMemo(() => {
+    const geoms = [
+      new THREE.IcosahedronGeometry(3),
+      new THREE.CapsuleGeometry(0.5, 1.5, 2, 16),
+      new THREE.OctahedronGeometry(1.5),
+      new THREE.TorusGeometry(0.6, 0.25, 16, 32),
+      new THREE.DodecahedronGeometry(1.5),
+    ];
+
+    const mats = [
+      new THREE.MeshNormalMaterial(),
+      ...[0xff007f, 0xfab1a0, 0xf1c40f, 0x4cd137, 0xff9ff3, 0xb5ff00, 0x00f3ff].map(
+        (color) =>
+          new THREE.MeshStandardMaterial({
+            color,
+            roughness: color === 0xff007f || color === 0xb5ff00 ? 0 : 0.1,
+            metalness: [0xf1c40f, 0xff9ff3, 0xb5ff00, 0x00f3ff].includes(color) ? 0.3 : 0.2,
+          })
+      ),
+    ];
+
+    return { geometries: geoms, materials: mats };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      geometries.forEach((g) => g.dispose());
+      materials.forEach((m) => m.dispose());
+    };
+  }, [geometries, materials]);
+
+  return SHAPES_CONFIG.map(({ position, r, geometryIndex }) => {
     return (
       <Geometry
-        key={JSON.stringify(position)}
-        position={position.map((p) => p * 2)}
+        key={geometryIndex}
+        position={[position[0] * 2, position[1] * 2, position[2] * 2]}
         soundEffects={soundEffectsRef}
-        geometry={geometry}
-        materials={MATERIALS_DATA}
+        geometry={geometries[geometryIndex]}
+        materials={materials}
         r={r}
       />
     );
   });
 }
-function Geometry({ r, position, geometry, materials, soundEffects }) {
-  const meshRef = useRef();
+
+interface GeometryProps {
+  r: number;
+  position: [number, number, number];
+  geometry: THREE.BufferGeometry;
+  materials: THREE.Material[];
+  soundEffects: React.RefObject<HTMLAudioElement[]>;
+}
+
+function Geometry({ r, position, geometry, materials, soundEffects }: GeometryProps) {
+  const meshRef = useRef<THREE.Group>(null);
   const [visible, setVisible] = useState(false);
 
-  const [startingMaterial] = useState(() => gsap.utils.random(materials));
+  const [startingMaterial] = useState(() => gsap.utils.random(materials) as THREE.Material);
 
   function getRandomMaterial() {
-    return gsap.utils.random(materials);
+    return gsap.utils.random(materials) as THREE.Material;
   }
 
-  function handleClick(e) {
-    const mesh = e.object;
+  function handleClick(e: ThreeEvent<MouseEvent>) {
+    e.stopPropagation();
+    const mesh = e.object as THREE.Mesh;
 
     if (
       soundEffects &&
@@ -82,7 +123,6 @@ function Geometry({ r, position, geometry, materials, soundEffects }) {
     ) {
       const audio = gsap.utils.random(soundEffects.current);
       audio.currentTime = 0;
-
       audio.play().catch((err) => console.log("Audio play blocked: ", err));
     }
 
@@ -106,9 +146,11 @@ function Geometry({ r, position, geometry, materials, soundEffects }) {
   };
 
   useEffect(() => {
+    if (!meshRef.current) return;
+
     let ctx = gsap.context(() => {
       setVisible(true);
-      gsap.from(meshRef.current.scale, {
+      gsap.from(meshRef.current!.scale, {
         x: 0,
         y: 0,
         z: 0,
@@ -117,7 +159,7 @@ function Geometry({ r, position, geometry, materials, soundEffects }) {
         delay: 0.03,
       });
     });
-    return () => ctx.revert(); // for cleanup
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -136,69 +178,10 @@ function Geometry({ r, position, geometry, materials, soundEffects }) {
   );
 }
 
-const SHAPES_DATA = [
-  {
-    position: [0, 0, 0],
-    r: 1,
-    geometry: new THREE.IcosahedronGeometry(3), // Gem / Diamond Ball
-  },
-  {
-    position: [1, -0.75, 4],
-    r: 1.3,
-    geometry: new THREE.CapsuleGeometry(0.5, 1.5, 2, 16), // Pill / Capsule
-  },
-  {
-    position: [-1.4, 2, -4],
-    r: 1.5,
-    geometry: new THREE.OctahedronGeometry(1.5), // Diamond / Crystal
-  },
-  {
-    position: [-0.8, -0.75, 5],
-    r: 1.7,
-    geometry: new THREE.TorusGeometry(0.6, 0.25, 16, 32), // Donut / Torus
-  },
-  {
-    position: [1.6, 1.6, -4],
-    r: 1.9,
-    geometry: new THREE.DodecahedronGeometry(1.5), // Socket Ball / 12-Sided Ball
-  },
-];
-
-const MATERIALS_DATA = [
-  new THREE.MeshNormalMaterial(),
-  new THREE.MeshStandardMaterial({
-    color: 0xff007f,
-    roughness: 0,
-    metalness: 0.2,
-  }),
-  new THREE.MeshStandardMaterial({
-    color: 0xfab1a0,
-    roughness: 0.1,
-    metalness: 0.2,
-  }),
-  new THREE.MeshStandardMaterial({
-    color: 0xf1c40f,
-    roughness: 0.1,
-    metalness: 0.3,
-  }),
-  new THREE.MeshStandardMaterial({
-    color: 0x4cd137,
-    roughness: 0.1,
-    metalness: 0.2,
-  }),
-  new THREE.MeshStandardMaterial({
-    color: 0xff9ff3,
-    roughness: 0.1,
-    metalness: 0.3,
-  }),
-  new THREE.MeshStandardMaterial({
-    roughness: 0,
-    metalness: 0.3,
-    color: 0xb5ff00,
-  }),
-  new THREE.MeshStandardMaterial({
-    color: 0x00f3ff,
-    roughness: 0.1,
-    metalness: 0.3,
-  }),
+const SHAPES_CONFIG = [
+  { position: [0, 0, 0], r: 1, geometryIndex: 0 },
+  { position: [1, -0.75, 4], r: 1.3, geometryIndex: 1 },
+  { position: [-1.4, 2, -4], r: 1.5, geometryIndex: 2 },
+  { position: [-0.8, -0.75, 5], r: 1.7, geometryIndex: 3 },
+  { position: [1.6, 1.6, -4], r: 1.9, geometryIndex: 4 },
 ];
