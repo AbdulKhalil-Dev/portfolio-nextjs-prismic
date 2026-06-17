@@ -1,4 +1,5 @@
 import Bounded from "@/components/Bounded";
+import ContentList from "@/components/ContentList";
 import Heading from "@/components/Heading";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -13,14 +14,14 @@ export type ContentIndexProps = SliceComponentProps<Content.ContentIndexSlice>;
  * Component for "ContentIndex" Slices.
  */
 const ContentIndex: FC<ContentIndexProps> = ({ slice }) => {
+
+  
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for content_index (variation: {slice.variation})
-      slices.
-      <br />
       <Heading size="xl" className="mb-8">
         {slice.primary.heading}
       </Heading>
@@ -29,6 +30,8 @@ const ContentIndex: FC<ContentIndexProps> = ({ slice }) => {
           <PrismicRichText field={slice.primary.description} />
         </div>
       )}
+      
+      <ContentList />
     </Bounded>
   );
 };

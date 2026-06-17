@@ -58,10 +58,10 @@
           "placeholder": ""
         }
       },
-      "tiktok_link": {
+      "instagram_link": {
         "type": "Link",
         "config": {
-          "label": "TikTok Link",
+          "label": "Instagram Link",
           "placeholder": "",
           "select": null,
           "allowTargetBlank": true,

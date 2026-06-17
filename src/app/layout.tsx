@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingBar from "@/components/LoadingBar";
+import Preloader from "@/components/Preloader";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -29,8 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" className="bg-[#130f40] text-slate-100 scroll-smooth">
+    <html lang="en" translate="no" className="bg-[#130f40] text-slate-100 scroll-smooth overflow-x-hidden">
       <body className={urbanist.className} suppressHydrationWarning>
+        <Preloader />
         <LoadingBar />
         <CustomCursor />
         <Header />
