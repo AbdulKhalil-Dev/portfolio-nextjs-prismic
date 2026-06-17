@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: "Creative Developer",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.avif",
         width: 1200,
         height: 630,
         alt: "Abdul Khalil | Creative Developer Portfolio Preview",
