@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingBar from "@/components/LoadingBar";
-import Preloader from "@/components/Preloader";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -12,12 +11,20 @@ const urbanist = Urbanist({
 
 export const metadata: Metadata = {
   title: "Abdul Khalil | Creative Developer",
-  description: "Abdul Khalil is a Creative Full-Stack Developer specializing in building interactive 3D web experiences, modern React/Next.js applications, and clean user interfaces.",
+  description:
+    "Abdul Khalil is a Creative Full-Stack Developer specializing in building interactive 3D web experiences, modern React/Next.js applications, and clean user interfaces.",
   metadataBase: new URL("https://abdulkhalildev.vercel.app"),
   openGraph: {
     title: "Abdul Khalil | Creative Developer",
-    description: "Creative Developer crafting interactive 3D web experiences and Next.js applications.",
-    images: ["/og-image.png"],
+    description: "Creative Developer",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Abdul Khalil | Creative Developer Portfolio Preview",
+      },
+    ],
   },
   other: {
     google: "notranslate",
@@ -30,9 +37,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" className="bg-[#130f40] text-slate-100 scroll-smooth overflow-x-hidden">
-      <body className={urbanist.className} suppressHydrationWarning>
-        <Preloader />
+    <html lang="en" translate="no" className="scroll-smooth">
+      <body
+        className={`${urbanist.className} bg-[#130f40] text-slate-100 overflow-x-hidden antialiased`}
+        suppressHydrationWarning
+      >
         <LoadingBar />
         <CustomCursor />
         <Header />
