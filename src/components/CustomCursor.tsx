@@ -80,12 +80,12 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorDotRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9999] h-1.5 w-1.5 rounded-full bg-[#39ff14] hidden md:block"
+        className="pointer-events-none fixed top-0 left-0 z-[9999] h-2 w-2 rounded-full bg-[#39ff14] hidden md:block"
       />
 
       <div
         ref={cursorOutlineRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9998] h-4 w-4 rounded-full border border-[#00ffff] bg-[#00ffff]/5 hidden md:block"
+        className="pointer-events-none fixed top-0 left-0 z-[9998] h-6 w-6 rounded-full border border-[#00ffff] bg-[#00ffff]/5 hidden md:block"
       />
     </>
   );

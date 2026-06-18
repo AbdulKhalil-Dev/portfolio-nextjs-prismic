@@ -1,5 +1,7 @@
-import React from "react";
-import { Content } from "@prismicio/client";
+"use client"
+
+import React, { useRef } from "react";
+import { Content, isFilled } from "@prismicio/client";
 import { MdArrowOutward } from "react-icons/md";
 import Link from "next/link";
 
@@ -16,16 +18,19 @@ export default function ContentList({
   fallbackItemImage,
   viewMoreText = "Read More",
 }: ContentListProps) {
+  const component = useRef(null)
 
-  const urlPrefix = contentType === "Blog" ? "/blog" : "project"
+  const urlPrefix = contentType === "Blog" ? "/blog" : "/project"
 
   return (
-    <div>
+    <div ref={component}>
       <ul className="grid border-b border-b-slate-100">
         {items.map((item, index) => {
           
           return (
-            <li key={index} className="list-item opacity-0f">
+            <>
+            {isFilled.keyText(item.data.title) &&(
+              <li key={index} className="list-item opacity-0f">
               <Link
                 href= {urlPrefix + "/" + "item.uid"}
                 className="flex flex-col justify-between border-t border-t-slate-100 py-10 text-slate-200 md:flex-row"
@@ -44,9 +49,17 @@ export default function ContentList({
                 </span>
               </Link>
             </li>
+          )}
+            </>
           );
         })}
       </ul>
+
+{/* Hover Element */}
+    <div className="hover-reveal pointer-events-none absolute left-0 top-0 -z-10">
+
+    </div>
+
     </div>
   );
 }
