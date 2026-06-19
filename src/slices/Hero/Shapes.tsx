@@ -12,7 +12,7 @@ export default function Shapes() {
       <Canvas
         className="z-0"
         shadows
-        gl={{ antialias: false }}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
         dpr={[1, 1.5]}
         camera={{ position: [0, 0, 25], fov: 30, near: 1, far: 40 }}
       >
@@ -24,11 +24,11 @@ export default function Shapes() {
           <ContactShadows
             position={[0, -3.5, 0]}
             opacity={0.65}
-            scale={40}
-            blur={1}
+            scale={20}
+            blur={2.5}
             far={9}
           />
-          <Environment preset="studio" />
+          <Environment preset="city" />
         </Suspense>
       </Canvas>
     </div>
@@ -36,19 +36,7 @@ export default function Shapes() {
 }
 
 function Geometries() {
-  const soundEffectsRef = useRef<HTMLAudioElement[]>([]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      soundEffectsRef.current = [
-        new Audio("/sounds/knock1.ogg"),
-        new Audio("/sounds/knock2.ogg"),
-        new Audio("/sounds/knock3.ogg"),
-      ];
-      soundEffectsRef.current.forEach((audio) => (audio.volume = 0.3));
-    }
-  }, []);
-
+  // ڈبل فنکشن ڈیکلریشن کا ایرر فکس کر دیا گیا ہے
   const { geometries, materials } = useMemo(() => {
     const geoms = [
       new THREE.IcosahedronGeometry(3),
@@ -85,7 +73,6 @@ function Geometries() {
       <Geometry
         key={geometryIndex}
         position={[position[0] * 2, position[1] * 2, position[2] * 2]}
-        soundEffects={soundEffectsRef}
         geometry={geometries[geometryIndex]}
         materials={materials}
         r={r}
@@ -99,13 +86,11 @@ interface GeometryProps {
   position: [number, number, number];
   geometry: THREE.BufferGeometry;
   materials: THREE.Material[];
-  soundEffects: React.RefObject<HTMLAudioElement[]>;
 }
 
-function Geometry({ r, position, geometry, materials, soundEffects }: GeometryProps) {
+function Geometry({ r, position, geometry, materials }: GeometryProps) {
   const meshRef = useRef<THREE.Group>(null);
   const [visible, setVisible] = useState(false);
-
   const [startingMaterial] = useState(() => gsap.utils.random(materials) as THREE.Material);
 
   function getRandomMaterial() {
@@ -116,13 +101,10 @@ function Geometry({ r, position, geometry, materials, soundEffects }: GeometryPr
     e.stopPropagation();
     const mesh = e.object as THREE.Mesh;
 
-    if (
-      soundEffects &&
-      soundEffects.current &&
-      soundEffects.current.length > 0
-    ) {
-      const audio = gsap.utils.random(soundEffects.current);
-      audio.currentTime = 0;
+    if (typeof window !== "undefined") {
+      const randomSound = gsap.utils.random(["1", "2", "3"]);
+      const audio = new Audio(`/sounds/knock${randomSound}.ogg`);
+      audio.volume = 0.3;
       audio.play().catch((err) => console.log("Audio play blocked: ", err));
     }
 

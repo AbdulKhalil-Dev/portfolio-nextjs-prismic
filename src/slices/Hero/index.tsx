@@ -1,12 +1,19 @@
 "use client";
 
-import { FC, useEffect, useRef, useState, useMemo } from "react";
-
+import { FC, useEffect, useRef, useMemo } from "react";
 import { Content, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { gsap } from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
+import dynamic from "next/dynamic";
 import Bounded from "@/components/Bounded";
-import Shapes from "./Shapes";
+
+gsap.registerPlugin(TextPlugin);
+
+const Shapes = dynamic(() => import("./Shapes"), {
+  ssr: false,
+  loading: () => <div className="h-[500px] w-full" />,
+});
 
 /**
  * Props for `Hero`.
@@ -22,9 +29,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   /**
    * Typewriter.
    */
-  const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
-  const [deleting, setDeleting] = useState(false);
+  const typewriterRef = useRef<HTMLSpanElement>(null);
 
   const words = useMemo(() => {
     return [
@@ -36,31 +41,6 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       "Full Stack Developer",
     ];
   }, []);
-  
-useEffect(() => {
-    const currentWord = words[index];
-
-    const timeout = setTimeout(() => {
-      if (!deleting) {
-        const nextText = currentWord.substring(0, text.length + 1);
-        setText(nextText);
-
-        if (nextText === currentWord) {
-          setTimeout(() => setDeleting(true), 1500);
-        }
-      } else {
-        const nextText = currentWord.substring(0, text.length - 1);
-        setText(nextText);
-
-        if (nextText === "") {
-          setDeleting(false);
-          setIndex((prev) => (prev + 1) % words.length);
-        }
-      }
-    }, deleting ? 50 : 100);
-
-    return () => clearTimeout(timeout);
-  }, [deleting, index, words, text]);
 
   /**
    * Gsap.
@@ -84,40 +64,42 @@ useEffect(() => {
           ease: "elastic.out(1,0.3)",
           duration: 1,
           transformOrigin: "left top",
-          delay: 0.5,
+          delay: 0.8,
           stagger: {
             each: 0.1,
             from: "random",
           },
+          clearProps: "willChange",
         },
       );
 
-      tl.fromTo(
-        ".job-title",
-        {
-          y: 20,
-          opacity: 0,
-          scale: 1.2,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          scale: 1,
-          ease: "elastic.out(1,0.3)",
-          onComplete: () => gsap.set(".job-title", { clearProps: "opacity" }),
-        },
-      );
+      if (typewriterRef.current) {
+        const typewriterTl = gsap.timeline({ repeat: -1 });
+        words.forEach((word) => {
+          typewriterTl
+            .to(typewriterRef.current, {
+              duration: word.length * 0.08,
+              text: word,
+              ease: "none",
+            })
+            .to({}, { duration: 1.5 })
+            .to(typewriterRef.current, {
+              duration: word.length * 0.04,
+              text: "",
+              ease: "none",
+            });
+        });
+      }
     }, component);
     return () => ctx.revert();
-  }, []);
+  }, [words]);
 
   const renderLetters = (name: KeyTextField, key: string) => {
     if (!name) return;
     return name.split("").map((letter, index) => (
       <span
         key={index}
-        className={`name-animation name-animation-${key} inline-block opacity-0`}
+        className={`name-animation name-animation-${key} inline-block opacity-0 will-change-transform`}
       >
         {letter}
       </span>
@@ -144,11 +126,8 @@ useEffect(() => {
               {renderLetters(slice.primary.last_name, "last")}
             </span>
           </h1>
-          <span
-            className="job-title min-h-[40px] block bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 bg-clip-text text-xl font-bold uppercase tracking-[.2em] text-transparent md:text-2xl"
-            style={{ opacity: text ? 1 : 0 }}
-          >
-            {text}
+          <span className="min-h-[40px] block bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 bg-clip-text text-xl font-bold uppercase tracking-[.2em] text-transparent md:text-2xl">
+            <span ref={typewriterRef}></span>
             <span className="animate-pulse text-slate-100 ml-0.5 font-normal">
               |
             </span>
