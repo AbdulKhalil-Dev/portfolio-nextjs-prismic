@@ -9,6 +9,11 @@ const urbanist = Urbanist({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 export const metadata: Metadata = {
   title: "Abdul Khalil | Creative Developer",
   description:
@@ -19,15 +24,12 @@ export const metadata: Metadata = {
     description: "Crafting Premium Web Experiences.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.avif",
         width: 1200,
         height: 630,
         alt: "Abdul Khalil | Creative Developer Portfolio Preview",
       },
     ],
-  },
-  other: {
-    google: "notranslate",
   },
 };
 

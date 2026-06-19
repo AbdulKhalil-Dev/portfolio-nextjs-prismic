@@ -36,7 +36,6 @@ export default function Shapes() {
 }
 
 function Geometries() {
-  // ڈبل فنکشن ڈیکلریشن کا ایرر فکس کر دیا گیا ہے
   const { geometries, materials } = useMemo(() => {
     const geoms = [
       new THREE.IcosahedronGeometry(3),
