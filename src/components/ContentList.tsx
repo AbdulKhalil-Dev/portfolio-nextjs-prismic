@@ -43,7 +43,6 @@ export default function ContentList({
             y: 0,
             duration: 1.3,
             ease: "elastic.out(1,0.3)",
-            stagger: 0.2,
             scrollTrigger: {
               trigger: item,
               start: "top bottom-=100px",
@@ -53,8 +52,8 @@ export default function ContentList({
           },
         );
       });
+      return () => ctx.revert();
     }, component);
-    return () => ctx.revert();
   }, []);
 
   useEffect(() => {
@@ -89,14 +88,7 @@ export default function ContentList({
     };
   }, [currentItem]);
 
-  const contentImages = [
-    ...items,
-    ...items,
-    ...items,
-    ...items,
-    ...items,
-    ...items,
-  ].map((item) => {
+  const contentImages = items.map((item) => {
     const image = isFilled.image(item.data.hover_image)
       ? item.data.hover_image
       : fallbackItemImage;
@@ -109,6 +101,15 @@ export default function ContentList({
     });
   });
 
+  
+  useEffect(() => {
+    contentImages.forEach((url) => {
+      if (!url) return;
+      const img = new Image();
+      img.src = url;
+    });
+  }, [contentImages]);
+
   const onMouseEnter = (index: number) => {
     setCurrentItem(index);
   };
@@ -119,44 +120,42 @@ export default function ContentList({
         className="grid border-b border-b-slate-100"
         onMouseLeave={() => setCurrentItem(null)}
       >
-        {[...items, ...items, ...items, ...items, ...items, ...items].map(
-          (item, index) => {
-            return (
-              <React.Fragment key={index}>
-                {isFilled.keyText(item.data.title) && (
-                  <li
-                    className="list-item opacity-100"
-                    onMouseEnter={() => onMouseEnter(index)}
-                    onMouseLeave={() => setCurrentItem(null)}
-                    ref={(el) => {
-                      itemRef.current[index] = el;
-                    }}
+        {items.map((item, index) => {
+          return (
+            <React.Fragment key={index}>
+              {isFilled.keyText(item.data.title) && (
+                <li
+                  className="list-item opacity-100"
+                  onMouseEnter={() => onMouseEnter(index)}
+                  onMouseLeave={() => setCurrentItem(null)}
+                  ref={(el) => {
+                    itemRef.current[index] = el;
+                  }}
+                >
+                  <Link
+                    href={`${urlPrefix}/${item.uid}`}
+                    className="flex flex-col justify-between border-t border-t-slate-100 py-10 text-slate-200 md:flex-row"
+                    aria-label={item.data.title ?? ""}
                   >
-                    <Link
-                      href={`${urlPrefix}/${item.uid}`}
-                      className="flex flex-col justify-between border-t border-t-slate-100 py-10 text-slate-200 md:flex-row"
-                      aria-label={item.data.title ?? ""}
-                    >
-                      <div className="flex flex-col">
-                        <span className="text-3xl font-bold">
-                          {item.data.title}
-                        </span>
-                        <div className="flex gap-3 text-yellow-400 text-lg font-bold">
-                          {item.tags.map((tag, tagIndex) => {
-                            return <span key={tagIndex}>{tag}</span>;
-                          })}
-                        </div>
-                      </div>
-                      <span className="ml-auto flex items-center gap-2 text-xl font-medium md:ml-0">
-                        {viewMoreText} <MdArrowOutward />
+                    <div className="flex flex-col">
+                      <span className="text-3xl font-bold">
+                        {item.data.title}
                       </span>
-                    </Link>
-                  </li>
-                )}
-              </React.Fragment>
-            );
-          },
-        )}
+                      <div className="flex gap-3 text-yellow-400 text-lg font-bold">
+                        {item.tags.map((tag, tagIndex) => {
+                          return <span key={tagIndex}>{tag}</span>;
+                        })}
+                      </div>
+                    </div>
+                    <span className="ml-auto flex items-center gap-2 text-xl font-medium md:ml-0">
+                      {viewMoreText} <MdArrowOutward />
+                    </span>
+                  </Link>
+                </li>
+              )}
+            </React.Fragment>
+          );
+        })}
       </ul>
 
       {/* Hover Element */}
