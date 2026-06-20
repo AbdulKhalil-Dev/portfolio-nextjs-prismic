@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingBar from "@/components/LoadingBar";
+import Footer from "@/components/Footer";
+import clsx from "clsx";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -39,15 +41,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" className="scroll-smooth">
+    <html lang="en" translate="no" className=" bg-slate-900 text-slate-100 scroll-smooth">
       <body
-        className={`${urbanist.className} bg-[#130f40] text-slate-100 overflow-x-hidden antialiased`}
+        // className={`clsx ${urbanist.className}antialiased relative min-h-screen`}
+        className={clsx(urbanist.className, "antialiased relative min-h-screen")}
         suppressHydrationWarning
       >
         <LoadingBar />
         <CustomCursor />
         <Header />
         {children}
+        <Footer />
+        <div className="absolute inset-0 -z-50 max-h-screen background-gradient"></div>
+        <div className="absolute pointer-events-none inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-20 mix-blend-soft-light"></div>
       </body>
     </html>
   );

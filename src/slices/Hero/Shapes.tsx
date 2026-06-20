@@ -17,8 +17,12 @@ export default function Shapes() {
         camera={{ position: [0, 0, 25], fov: 30, near: 1, far: 40 }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.6} /> 
-          <directionalLight position={[10, 15, 10]} intensity={1.5} castShadow />
+          <ambientLight intensity={0.6} />
+          <directionalLight
+            position={[10, 15, 10]}
+            intensity={1.5}
+            castShadow
+          />
 
           <Geometries />
           <ContactShadows
@@ -47,13 +51,20 @@ function Geometries() {
 
     const mats = [
       new THREE.MeshNormalMaterial(),
-      ...[0xff007f, 0xfab1a0, 0xf1c40f, 0x4cd137, 0xff9ff3, 0xb5ff00, 0x00f3ff].map(
+      ...[
+        0xff007f, 0xfab1a0, 0xf1c40f, 0x4cd137, 0xff9ff3, 0xb5ff00, 0x00f3ff,
+      ].map(
         (color) =>
           new THREE.MeshStandardMaterial({
             color,
             roughness: color === 0xff007f || color === 0xb5ff00 ? 0 : 0.1,
-            metalness: [0xf1c40f, 0xff9ff3, 0xb5ff00, 0x00f3ff].includes(color) ? 0.3 : 0.2,
-          })
+            metalness:
+              color === 0xff007f
+                ? 1
+                : [0xf1c40f, 0xff9ff3, 0xb5ff00, 0x00f3ff].includes(color)
+                  ? 0.3
+                  : 0.2,
+          }),
       ),
     ];
 
@@ -90,7 +101,9 @@ interface GeometryProps {
 function Geometry({ r, position, geometry, materials }: GeometryProps) {
   const meshRef = useRef<THREE.Group>(null);
   const [visible, setVisible] = useState(false);
-  const [startingMaterial] = useState(() => gsap.utils.random(materials) as THREE.Material);
+  const [startingMaterial] = useState(
+    () => gsap.utils.random(materials) as THREE.Material,
+  );
 
   function getRandomMaterial() {
     return gsap.utils.random(materials) as THREE.Material;
