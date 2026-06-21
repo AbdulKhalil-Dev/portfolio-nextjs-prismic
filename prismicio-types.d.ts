@@ -890,6 +890,21 @@ export type TechListSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *TextBlog → Default → Primary*
+ */
+export interface TextBlogSliceDefaultPrimary {
+  /**
+   * Text field in *TextBlog → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text_blog.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+}
+
+/**
  * Default variation for TextBlog Slice
  *
  * - **API ID**: `default`
@@ -898,7 +913,7 @@ export type TechListSlice = prismic.SharedSlice<
  */
 export type TextBlogSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<TextBlogSliceDefaultPrimary>,
   never
 >;
 
@@ -974,6 +989,7 @@ declare module "@prismicio/client" {
       TechListSliceVariation,
       TechListSliceDefault,
       TextBlogSlice,
+      TextBlogSliceDefaultPrimary,
       TextBlogSliceVariation,
       TextBlogSliceDefault,
     };

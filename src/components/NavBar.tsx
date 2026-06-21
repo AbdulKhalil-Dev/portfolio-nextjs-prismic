@@ -40,7 +40,7 @@ export default function NavBar({
           <button
             aria-label="Close menu"
             aria-expanded={open}
-            className="fixed right-4 top-3 block p-2 text-2xl text-slate-800 md:hidden "
+            className="fixed right-4 top-3 block p-1.5 text-2xl text-slate-800 bg-slate-50 rounded-xl md:hidden "
             onClick={() => setOpen(false)}
           >
             <MdClose />
