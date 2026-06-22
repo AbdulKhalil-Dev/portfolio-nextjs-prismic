@@ -52,7 +52,7 @@ function Geometries() {
     const mats = [
       new THREE.MeshNormalMaterial(),
       ...[
-        0xff007f, 0xfab1a0, 0xf1c40f, 0x4cd137, 0xff9ff3, 0xb5ff00, 0x00f3ff,
+        0xff007f, 0xfab1a0, 0xf1c40f, 0x4cd137, 0x44f3f3, 0xb5ff00, 0xff22ff,
       ].map(
         (color) =>
           new THREE.MeshStandardMaterial({
@@ -61,7 +61,7 @@ function Geometries() {
             metalness:
               color === 0xff007f
                 ? 1
-                : [0xf1c40f, 0xff9ff3, 0xb5ff00, 0x00f3ff].includes(color)
+                : [0xf1c40f, 0x44f3f3, 0xb5ff00, 0xff22ff].includes(color)
                   ? 0.3
                   : 0.2,
           }),
