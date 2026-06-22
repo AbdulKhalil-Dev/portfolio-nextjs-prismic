@@ -41,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" className=" bg-slate-900 text-slate-100 scroll-smooth">
+    <html lang="en" translate="no" data-scroll-behavior="smooth" className=" bg-slate-900 text-slate-100">
       <body
         // className={`clsx ${urbanist.className}antialiased relative min-h-screen`}
         className={clsx(urbanist.className, "antialiased relative min-h-screen")}

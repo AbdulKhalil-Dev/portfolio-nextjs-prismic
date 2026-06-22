@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { asImageSrc } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
+import Bounded from "@/components/Bounded";
+import Heading from "@/components/Heading";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -13,7 +15,20 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const client = createClient();
   const page = await client.getByUID("blog_post", uid).catch(() => notFound());
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <Bounded as="article">
+        <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
+          <Heading as="h1">{page.data.title}</Heading>
+          <div className="flex gap-4 text-yellow-400 text-xl font-bold">
+          {page.tags.map((tag)=>(
+            <span key={tag}>{tag}</span>
+          ))}
+          </div>
+        <p>{page.data.date}</p>
+        <SliceZone slices={page.data.slices} components={components} />
+        </div>
+      </Bounded>
+        )
 }
 
 export async function generateMetadata({
