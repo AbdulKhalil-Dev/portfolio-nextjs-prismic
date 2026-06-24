@@ -38,7 +38,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       "UI/UX Focused Engineer",
       "Creative Technologist",
       "MERN Stack Specialist",
-      "Full Stack Developer",
+      "Beyond Interfaces",
     ];
   }, []);
 
