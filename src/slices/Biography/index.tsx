@@ -22,10 +22,7 @@ const Biography: FC<BiographyProps> = ({ slice }) => {
     >
       <div className="grid gap-x-8 gap-y-6 md:grid-cols-[1fr,2fr] items-start">
         <div className="md:row-start-1 w-full mx-auto max-w-[320px] md:max-w-[270px]">
-          <Avatar
-            image={slice.primary.avatar}
-            className="w-full h-auto"
-          />
+          <Avatar image={slice.primary.avatar} className="w-full h-auto" />
         </div>
         <div className="md:col-start-2 grid gap-6">
           <Heading as="h1" size="xl">
@@ -36,10 +33,10 @@ const Biography: FC<BiographyProps> = ({ slice }) => {
           </div>
 
           {slice.primary.button_text && slice.primary.button_link && (
-          <Button
-            linkField={slice.primary.button_link}
-            label={slice.primary.button_text}
-          />
+            <Button
+              linkField={slice.primary.button_link}
+              label={slice.primary.button_text}
+            />
           )}
         </div>
       </div>
