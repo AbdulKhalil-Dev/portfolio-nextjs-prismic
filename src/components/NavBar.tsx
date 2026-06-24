@@ -19,7 +19,7 @@ export default function NavBar({
 
   return (
     <nav aria-label="Main navigation">
-      <ul className="flex flex-col justify-between rounded-b-lg bg-slate-50 px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
+      <ul className="flex flex-col justify-between rounded-full bg-slate-100 px-5 py-2.5 md:m-4 md:flex-row md:items-center md:rounded-full">
         <div className="flex items-center justify-between">
           <NameLogo name={settings.data.name} />
           <button
@@ -33,14 +33,14 @@ export default function NavBar({
         </div>
         <div
           className={clsx(
-            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-center justify-center gap-6 bg-gradient-to-tr from-[#587049] via-[#8FA63A] to-[#333949] pr-0 pt-0 transition-transform duration-300 ease-in-out md:hidden",
+            "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-center justify-center gap-6 bg-gradient-to-br from-blue-500/50 via-gray-100/70 to-gray-300/80 backdrop-blur-md pr-0 pt-0 transition-transform duration-300 ease-in-out md:hidden",
             open ? "translate-x-0" : "translate-x-[100%]",
           )}
         >
           <button
             aria-label="Close menu"
             aria-expanded={open}
-            className="fixed right-4 top-3 block p-2 text-2xl text-slate-800 bg-slate-50 rounded-xl md:hidden "
+            className="fixed right-4 top-3 block p-2 text-2xl text-slate-800 rounded-xl md:hidden "
             onClick={() => setOpen(false)}
           >
             <MdClose />
@@ -65,7 +65,7 @@ export default function NavBar({
                       "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                       pathname.includes(asLink(link) as string)
                         ? "translate-y-6"
-                        : "translate-y-18",
+                        : "translate-y-16",
                     )}
                   />
                   <span className="relative">{label}</span>
@@ -115,7 +115,7 @@ function DesktopMenu({
   pathname: string;
 }) {
   return (
-    <div className="relative z-50 hidden flex-row items-center gap-1 bg-transparent py-0 md:flex">
+    <div className="relative z-50 hidden flex-row items-center gap-1 bg-transparent backdrop-blur-md py-0 md:flex">
       {settings?.data?.nav_items?.map(({ link, label }, index) => (
         <React.Fragment key={label}>
           <li>

@@ -12,7 +12,7 @@ export type TextBlogProps = SliceComponentProps<Content.TextBlogSlice>;
  */
 const TextBlog: FC<TextBlogProps> = ({ slice }) => {
   return (
-    <div className="prose prose-invert">
+    <div className="max-w-prose">
     <PrismicRichText field={slice.primary.text} />
     </div>
   );

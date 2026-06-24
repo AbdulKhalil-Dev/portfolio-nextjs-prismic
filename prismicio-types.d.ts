@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type BlogPostDocumentDataSlicesSlice = TextBlogSlice;
+type BlogPostDocumentDataSlicesSlice = ImageBlogSlice | TextBlogSlice;
 
 /**
  * Content for Blog Post documents
@@ -296,7 +296,7 @@ interface PageDocumentData {
 export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
-type ProjectDocumentDataSlicesSlice = TextBlogSlice;
+type ProjectDocumentDataSlicesSlice = ImageBlogSlice | TextBlogSlice;
 
 /**
  * Content for Project documents
@@ -756,6 +756,58 @@ export type ContentIndexSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Experience → Default → Primary → Heading*
+ */
+export interface ExperienceSliceDefaultPrimaryHeadingItem {}
+
+/**
+ * Primary content in *Experience → Default → Primary*
+ */
+export interface ExperienceSliceDefaultPrimary {
+  /**
+   * Heading field in *Experience → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.heading[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  heading: prismic.GroupField<
+    Simplify<ExperienceSliceDefaultPrimaryHeadingItem>
+  >;
+}
+
+/**
+ * Default variation for Experience Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExperienceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ExperienceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Experience*
+ */
+type ExperienceSliceVariation = ExperienceSliceDefault;
+
+/**
+ * Experience Shared Slice
+ *
+ * - **API ID**: `experience`
+ * - **Description**: Experience
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExperienceSlice = prismic.SharedSlice<
+  "experience",
+  ExperienceSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -806,6 +858,51 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Primary content in *ImageBlog → Default → Primary*
+ */
+export interface ImageBlogSliceDefaultPrimary {
+  /**
+   * Image field in *ImageBlog → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_blog.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ImageBlog Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageBlogSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageBlogSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageBlog*
+ */
+type ImageBlogSliceVariation = ImageBlogSliceDefault;
+
+/**
+ * ImageBlog Shared Slice
+ *
+ * - **API ID**: `image_blog`
+ * - **Description**: ImageBlog
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageBlogSlice = prismic.SharedSlice<
+  "image_blog",
+  ImageBlogSliceVariation
+>;
 
 /**
  * Item in *TechList → Default → Primary → Tech Name*
@@ -979,10 +1076,19 @@ declare module "@prismicio/client" {
       ContentIndexSliceDefaultPrimary,
       ContentIndexSliceVariation,
       ContentIndexSliceDefault,
+      ExperienceSlice,
+      ExperienceSliceDefaultPrimaryHeadingItem,
+      ExperienceSliceDefaultPrimary,
+      ExperienceSliceVariation,
+      ExperienceSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      ImageBlogSlice,
+      ImageBlogSliceDefaultPrimary,
+      ImageBlogSliceVariation,
+      ImageBlogSliceDefault,
       TechListSlice,
       TechListSliceDefaultPrimaryTechNameItem,
       TechListSliceDefaultPrimary,

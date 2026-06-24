@@ -1,0 +1,27 @@
+{
+  "id": "experience",
+  "type": "SharedSlice",
+  "name": "Experience",
+  "description": "Experience",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "Group",
+          "config": {
+            "label": "Heading",
+            "repeat": true,
+            "fields": {}
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
