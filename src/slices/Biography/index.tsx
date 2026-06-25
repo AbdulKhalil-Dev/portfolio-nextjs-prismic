@@ -31,7 +31,6 @@ const Biography: FC<BiographyProps> = ({ slice }) => {
           <div className="prose md:prose-xl prose-slate prose-invert">
             <PrismicRichText field={slice.primary.description} />
           </div>
-
           {slice.primary.button_text && slice.primary.button_link && (
             <Button
               linkField={slice.primary.button_link}

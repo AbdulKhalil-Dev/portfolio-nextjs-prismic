@@ -40,7 +40,7 @@ export default function NavBar({
           <button
             aria-label="Close menu"
             aria-expanded={open}
-            className="fixed right-4 top-3 block p-2 text-2xl text-slate-800 rounded-xl md:hidden "
+            className="fixed right-6 top-5 block p-0.5 text-2xl text-red-700 rounded-xl md:hidden border-2 border-slate-900/30"
             onClick={() => setOpen(false)}
           >
             <MdClose />
@@ -50,7 +50,7 @@ export default function NavBar({
               <li className="first:mt-8">
                 <PrismicNextLink
                   className={clsx(
-                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-900 ",
+                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-900",
                   )}
                   field={link}
                   onClick={() => setOpen(false)}

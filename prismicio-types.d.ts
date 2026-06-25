@@ -761,6 +761,41 @@ export type ContentIndexSlice = prismic.SharedSlice<
 export interface ExperienceSliceDefaultPrimaryHeadingItem {}
 
 /**
+ * Item in *Experience → Default → Primary → Title*
+ */
+export interface ExperienceSliceDefaultPrimaryTitleItem {
+  /**
+   * Time Period field in *Experience → Default → Primary → Title*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.title[].time_period
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  time_period: prismic.KeyTextField;
+
+  /**
+   * Instituation field in *Experience → Default → Primary → Title*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.title[].instituation
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  instituation: prismic.KeyTextField;
+
+  /**
+   * Description field in *Experience → Default → Primary → Title*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.title[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+}
+
+/**
  * Primary content in *Experience → Default → Primary*
  */
 export interface ExperienceSliceDefaultPrimary {
@@ -775,6 +810,16 @@ export interface ExperienceSliceDefaultPrimary {
   heading: prismic.GroupField<
     Simplify<ExperienceSliceDefaultPrimaryHeadingItem>
   >;
+
+  /**
+   * Title field in *Experience → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: experience.default.primary.title[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  title: prismic.GroupField<Simplify<ExperienceSliceDefaultPrimaryTitleItem>>;
 }
 
 /**
@@ -1078,6 +1123,7 @@ declare module "@prismicio/client" {
       ContentIndexSliceDefault,
       ExperienceSlice,
       ExperienceSliceDefaultPrimaryHeadingItem,
+      ExperienceSliceDefaultPrimaryTitleItem,
       ExperienceSliceDefaultPrimary,
       ExperienceSliceVariation,
       ExperienceSliceDefault,

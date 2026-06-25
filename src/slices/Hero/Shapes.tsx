@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import { Canvas, ThreeEvent } from "@react-three/fiber";
-import { ContactShadows, Float, Environment } from "@react-three/drei";
+import { ContactShadows, Float } from "@react-three/drei";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 
@@ -17,14 +17,14 @@ export default function Shapes() {
         camera={{ position: [0, 0, 25], fov: 30, near: 1, far: 40 }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.6} />
-          <directionalLight
-            position={[10, 15, 10]}
-            intensity={1.5}
-            castShadow
-          />
+          <ambientLight intensity={1.2} />
+          <directionalLight position={[10, 15, 10]} intensity={3} castShadow />
+          <directionalLight position={[-10, -5, -10]} intensity={0.8} />
+          <pointLight position={[0, 10, 5]} intensity={2} color="##0984e3" />
+          <pointLight position={[-5, 5, -5]} intensity={1.5} color="##fab1a0" />
 
           <Geometries />
+
           <ContactShadows
             position={[0, -3.5, 0]}
             opacity={0.65}
@@ -32,7 +32,6 @@ export default function Shapes() {
             blur={2.5}
             far={9}
           />
-          <Environment preset="city" />
         </Suspense>
       </Canvas>
     </div>
@@ -50,22 +49,46 @@ function Geometries() {
     ];
 
     const mats = [
-      new THREE.MeshNormalMaterial(),
-      ...[
-        0xff007f, 0xfab1a0, 0xf1c40f, 0x4cd137, 0x44f3f3, 0xb5ff00, 0xff22ff,
-      ].map(
-        (color) =>
-          new THREE.MeshStandardMaterial({
-            color,
-            roughness: color === 0xff007f || color === 0xb5ff00 ? 0 : 0.1,
-            metalness:
-              color === 0xff007f
-                ? 1
-                : [0xf1c40f, 0x44f3f3, 0xb5ff00, 0xff22ff].includes(color)
-                  ? 0.3
-                  : 0.2,
-          }),
-      ),
+      new THREE.MeshStandardMaterial({
+        color: 0x44ff6f,
+        roughness: 0,
+        metalness: 0.4,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0x4fc3f7,
+        roughness: 0,
+        metalness: 0.2,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0xf1c40f,
+        roughness: 0,
+        metalness: 0.3,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0xdd44fc,
+        roughness: 0.05,
+        metalness: 0.3,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0x442ff4,
+        roughness: 0,
+        metalness: 0.1,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0x1abc9c,
+        roughness: 0,
+        metalness: 0.3,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0xB53471,
+        roughness: 0,
+        metalness: 0.2,
+      }),
+      new THREE.MeshStandardMaterial({
+        color: 0xa4b0be,
+        roughness: 0,
+        metalness: 0.3,
+      }),
     ];
 
     return { geometries: geoms, materials: mats };
@@ -129,12 +152,14 @@ function Geometry({ r, position, geometry, materials }: GeometryProps) {
       repeat: 1,
       yoyo: true,
     });
+
     mesh.material = getRandomMaterial();
   }
 
   const handlePointerOver = () => {
     document.body.style.cursor = "pointer";
   };
+
   const handlePointerOut = () => {
     document.body.style.cursor = "default";
   };
@@ -153,6 +178,7 @@ function Geometry({ r, position, geometry, materials }: GeometryProps) {
         delay: 0.03,
       });
     });
+
     return () => ctx.revert();
   }, []);
 
@@ -173,9 +199,25 @@ function Geometry({ r, position, geometry, materials }: GeometryProps) {
 }
 
 const SHAPES_CONFIG = [
-  { position: [0, 0, 0], r: 1, geometryIndex: 0 },
-  { position: [1, -0.75, 4], r: 1.3, geometryIndex: 1 },
-  { position: [-1.4, 2, -4], r: 1.5, geometryIndex: 2 },
-  { position: [-0.8, -0.75, 5], r: 1.7, geometryIndex: 3 },
-  { position: [1.6, 1.6, -4], r: 1.9, geometryIndex: 4 },
+  { position: [0, 0, 0] as [number, number, number], r: 1, geometryIndex: 0 },
+  {
+    position: [1, -0.75, 4] as [number, number, number],
+    r: 1.3,
+    geometryIndex: 1,
+  },
+  {
+    position: [-1.4, 2, -4] as [number, number, number],
+    r: 1.5,
+    geometryIndex: 2,
+  },
+  {
+    position: [-0.8, -0.75, 5] as [number, number, number],
+    r: 1.7,
+    geometryIndex: 3,
+  },
+  {
+    position: [1.6, 1.6, -4] as [number, number, number],
+    r: 1.9,
+    geometryIndex: 4,
+  },
 ];

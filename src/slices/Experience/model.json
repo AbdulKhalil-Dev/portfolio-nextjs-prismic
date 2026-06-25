@@ -19,6 +19,38 @@
             "repeat": true,
             "fields": {}
           }
+        },
+        "title": {
+          "type": "Group",
+          "config": {
+            "label": "Title",
+            "repeat": true,
+            "fields": {
+              "time_period": {
+                "type": "Text",
+                "config": {
+                  "label": "Time Period",
+                  "placeholder": ""
+                }
+              },
+              "instituation": {
+                "type": "Text",
+                "config": {
+                  "label": "Instituation",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
         }
       },
       "items": {}
