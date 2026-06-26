@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
-import { Urbanist } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingBar from "@/components/LoadingBar";
 import Footer from "@/components/Footer";
-import clsx from "clsx";
-
-const urbanist = Urbanist({
-  subsets: ["latin"],
-});
 
 export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
 };
+
 export const metadata: Metadata = {
   title: "Abdul Khalil | Creative Developer",
   description:
@@ -41,10 +36,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" data-scroll-behavior="smooth" className=" bg-slate-900 text-slate-100">
+    <html lang="en" translate="no" data-scroll-behavior="smooth" className="bg-slate-900 text-slate-100">
       <body
-        // className={`clsx ${urbanist.className}antialiased relative min-h-screen`}
-        className={clsx(urbanist.className, "antialiased relative min-h-screen")}
+        className="antialiased relative min-h-screen"
+        style={{ fontFamily: "'Urbanist', sans-serif" }}
         suppressHydrationWarning
       >
         <LoadingBar />
