@@ -233,6 +233,7 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | ExperienceSlice
   | ContentIndexSlice
   | TechListSlice
   | BiographySlice;
@@ -474,15 +475,15 @@ interface SettingsDocumentData {
   cta_label: prismic.KeyTextField;
 
   /**
-   * Instagram Link field in *Settings*
+   * Fiverr Link field in *Settings*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.instagram_link
+   * - **API ID Path**: settings.fiverr_link
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  instagram_link: prismic.LinkField<
+  fiverr_link: prismic.LinkField<
     string,
     string,
     unknown,

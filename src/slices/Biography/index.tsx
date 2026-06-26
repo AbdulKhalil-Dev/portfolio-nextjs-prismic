@@ -33,8 +33,8 @@ const Biography: FC<BiographyProps> = ({ slice }) => {
           </div>
           {slice.primary.button_text && slice.primary.button_link && (
             <Button
-              linkField={slice.primary.button_link}
-              label={slice.primary.button_text}
+            linkField={slice.primary.button_link}
+            label={slice.primary.button_text}
             />
           )}
         </div>

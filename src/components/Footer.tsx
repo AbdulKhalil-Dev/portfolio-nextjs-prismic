@@ -4,11 +4,14 @@ import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import Bounded from "@/components/Bounded";
 import { isFilled } from "@prismicio/client";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { SiFiverr } from "react-icons/si";
 
 export default async function Footer() {
   const client = createClient();
   const settings = await client.getSingle("settings");
+
+const socialLinkClass = "flex h-9 w-9 items-center justify-center text-xl text-slate-300 border border-slate-700 rounded-full transition-all duration-150 hover:scale-110 hover:text-yellow-400 hover:border-yellow-400 mx-1.5";
 
   return (
     <Bounded as="footer" className="text-slate-600">
@@ -60,25 +63,27 @@ export default async function Footer() {
           {isFilled.link(settings.data.github_link) && (
             <PrismicNextLink
               field={settings.data.github_link}
-              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 hover:text-yellow-400"
+              className={socialLinkClass}
               aria-label={settings.data.name + " on GitHub"}
             >
               <FaGithub />
             </PrismicNextLink>
           )}
-          {isFilled.link(settings.data.instagram_link) && (
+
+          {isFilled.link(settings.data.fiverr_link) && (
             <PrismicNextLink
-              field={settings.data.instagram_link}
-              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 hover:text-yellow-400"
-              aria-label={settings.data.name + " on Instagram"}
+              field={settings.data.fiverr_link}
+              className={socialLinkClass}
+              aria-label={settings.data.name + " on Fiverr"}
             >
-              <FaInstagram />
+              <SiFiverr />
             </PrismicNextLink>
           )}
+
           {isFilled.link(settings.data.linkedin_link) && (
             <PrismicNextLink
               field={settings.data.linkedin_link}
-              className="p-2 text-2xl text-slate-300 transition-all duration-150 hover:scale-125 hover:text-yellow-400"
+              className={socialLinkClass}
               aria-label={settings.data.name + " on LinkedIn"}
             >
               <FaLinkedin />

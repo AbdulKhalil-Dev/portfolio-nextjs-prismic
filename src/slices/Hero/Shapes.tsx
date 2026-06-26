@@ -20,8 +20,8 @@ export default function Shapes() {
           <ambientLight intensity={1.2} />
           <directionalLight position={[10, 15, 10]} intensity={3} castShadow />
           <directionalLight position={[-10, -5, -10]} intensity={0.8} />
-          <pointLight position={[0, 10, 5]} intensity={2} color="##0984e3" />
-          <pointLight position={[-5, 5, -5]} intensity={1.5} color="##fab1a0" />
+          <pointLight position={[0, 10, 5]} intensity={2} color="#1c1cf4" />
+          <pointLight position={[-5, 5, -5]} intensity={1.5} color="#fab170" />
 
           <Geometries />
 

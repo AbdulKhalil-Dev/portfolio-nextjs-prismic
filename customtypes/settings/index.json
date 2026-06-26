@@ -58,10 +58,10 @@
           "placeholder": ""
         }
       },
-      "instagram_link": {
+      "fiverr_link": {
         "type": "Link",
         "config": {
-          "label": "Instagram Link",
+          "label": "Fiverr Link",
           "placeholder": "",
           "select": null,
           "allowTargetBlank": true,
