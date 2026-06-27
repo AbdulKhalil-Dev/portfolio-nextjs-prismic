@@ -51,17 +51,17 @@ function Geometries() {
     const mats = [
       new THREE.MeshStandardMaterial({
         color: 0x44ff6f,
-        roughness: 0,
+        roughness: 0.03,
         metalness: 0.4,
       }),
       new THREE.MeshStandardMaterial({
         color: 0xf00a0a,
-        roughness: 0,
+        roughness: 0.01,
         metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
         color: 0xf1c40f,
-        roughness: 0,
+        roughness: 0.05,
         metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
@@ -71,23 +71,23 @@ function Geometries() {
       }),
       new THREE.MeshStandardMaterial({
         color: 0xf39c12,
-        roughness: 0,
+        roughness: 0.01,
         metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
         color: 0x1abc9c,
-        roughness: 0,
+        roughness: 0.2,
         metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
         color: 0xb5d471,
-        roughness: 0,
+        roughness: 0.01,
         metalness: 0.2,
       }),
       new THREE.MeshStandardMaterial({
         color: 0xa4b0be,
-        roughness: 0,
-        metalness: 0.3,
+        roughness: 0.5,
+        metalness: 1,
       }),
     ];
 
