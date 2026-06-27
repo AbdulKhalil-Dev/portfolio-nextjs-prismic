@@ -21,12 +21,16 @@ export default function NavBar({
     <nav aria-label="Main navigation">
       <ul className="flex flex-col justify-between rounded-full bg-slate-100 px-6 py-2.5 border-2 border-slate-900/30 md:m-4 md:flex-row md:items-center md:rounded-full">
         <div className="flex items-center justify-between">
-          <div className="relative bg-slate-900/40 backdrop-blur-md border-2 border-slate-700/50 px-4 py-1.5 rounded-full shadow-sm">
-            {/* Rotating Dot Layer */}
-            <div className="absolute inset-0 p-[2px] animate-[spin_4s_linear_infinite] rounded-full pointer-events-none">
-              <div className="w-2 h-2 rounded-full bg-[#5DC864] absolute -top-[5px] left-1/2 -translate-x-1/2" />
+          <div className="relative flex items-center gap-2 group cursor-pointer select-none">
+            {/* Professional Dynamic Logo Indicator (Replaced Rotating Dot) */}
+            <div className="relative flex items-center justify-center w-2 h-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-orange-600 shadow-[0_0_8px_#c2410c]"></span>
             </div>
+
+            <div className="font-black text-xl text-slate-100 tracking-wider transition-colors duration-300 group-hover:text-orange-500 [&&_p]:m-0">
             <NameLogo name={settings.data.name} />
+            </div>
           </div>
           <button
             aria-expanded={open}

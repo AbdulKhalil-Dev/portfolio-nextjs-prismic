@@ -428,7 +428,7 @@ interface SettingsDocumentData {
    * Name field in *Settings*
    *
    * - **Field Type**: Text
-   * - **Placeholder**: Enter Logo Name
+   * - **Placeholder**: *None*
    * - **API ID Path**: settings.name
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/text

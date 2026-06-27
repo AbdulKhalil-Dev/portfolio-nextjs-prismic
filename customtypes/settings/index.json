@@ -10,7 +10,7 @@
         "type": "Text",
         "config": {
           "label": "Name",
-          "placeholder": "Enter Logo Name"
+          "placeholder": ""
         }
       },
       "nav_items": {
