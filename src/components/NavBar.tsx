@@ -21,7 +21,13 @@ export default function NavBar({
     <nav aria-label="Main navigation">
       <ul className="flex flex-col justify-between rounded-full bg-slate-100 px-6 py-2.5 border-2 border-slate-900/30 md:m-4 md:flex-row md:items-center md:rounded-full">
         <div className="flex items-center justify-between">
-          <NameLogo name={settings.data.name} />
+          <div className="relative bg-slate-900/40 backdrop-blur-md border-2 border-slate-700/50 px-4 py-1.5 rounded-full shadow-sm">
+            {/* Rotating Dot Layer */}
+            <div className="absolute inset-0 p-[2px] animate-[spin_4s_linear_infinite] rounded-full pointer-events-none">
+              <div className="w-2 h-2 rounded-full bg-[#5DC864] absolute -top-[5px] left-1/2 -translate-x-1/2" />
+            </div>
+            <NameLogo name={settings.data.name} />
+          </div>
           <button
             aria-expanded={open}
             aria-label="Open menu"

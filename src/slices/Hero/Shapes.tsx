@@ -20,7 +20,7 @@ export default function Shapes() {
           <ambientLight intensity={1.2} />
           <directionalLight position={[10, 15, 10]} intensity={3} castShadow />
           <directionalLight position={[-10, -5, -10]} intensity={0.8} />
-          <pointLight position={[0, 10, 5]} intensity={2} color="#1c1cf4" />
+          <pointLight position={[0, 10, 5]} intensity={2} color="#00f2fe" />
           <pointLight position={[-5, 5, -5]} intensity={1.5} color="#fab170" />
 
           <Geometries />
@@ -55,9 +55,9 @@ function Geometries() {
         metalness: 0.4,
       }),
       new THREE.MeshStandardMaterial({
-        color: 0x4fc3f7,
+        color: 0xf00a0a,
         roughness: 0,
-        metalness: 0.2,
+        metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
         color: 0xf1c40f,
@@ -70,9 +70,9 @@ function Geometries() {
         metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
-        color: 0x442ff4,
+        color: 0xf39c12,
         roughness: 0,
-        metalness: 0.1,
+        metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
         color: 0x1abc9c,
@@ -80,7 +80,7 @@ function Geometries() {
         metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
-        color: 0xB53471,
+        color: 0xB5d471,
         roughness: 0,
         metalness: 0.2,
       }),
