@@ -80,7 +80,7 @@ function Geometries() {
         metalness: 0.3,
       }),
       new THREE.MeshStandardMaterial({
-        color: 0xB5d471,
+        color: 0xb5d471,
         roughness: 0,
         metalness: 0.2,
       }),

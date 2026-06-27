@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
 import LoadingBar from "@/components/LoadingBar";
 import Footer from "@/components/Footer";
+import { PrismicPreview } from "@prismicio/next";
+import { createClient, repositoryName } from "@/prismicio"; 
 
 export const viewport = {
   width: "device-width",
@@ -14,7 +16,7 @@ export const viewport = {
 export const metadata: Metadata = {
   title: "Abdul Khalil | Creative Developer",
   description:
-    "Creative Full-Stack Developer specializing in 3D web experiences, interactive React/Next.js applications, and high-performance user interfaces.",
+    "Creative Frontend Developer specializing in 3D web experiences, interactive React/Next.js applications, and high-performance user interfaces.",
   metadataBase: new URL("https://abdulkhalildev.vercel.app"),
   openGraph: {
     title: "Abdul Khalil | Creative Developer",
@@ -49,6 +51,8 @@ export default function RootLayout({
         <Footer />
         <div className="absolute inset-0 -z-50 max-h-screen background-gradient"></div>
         <div className="absolute pointer-events-none inset-0 -z-40 h-full bg-[url('/noisetexture.jpg')] opacity-20 mix-blend-soft-light"></div>
+        
+        <PrismicPreview repositoryName={repositoryName}/>
       </body>
     </html>
   );

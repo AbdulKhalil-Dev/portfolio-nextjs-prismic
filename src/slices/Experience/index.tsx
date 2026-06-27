@@ -16,8 +16,7 @@ const Experience = ({ slice }: ExperienceProps) => {
       </Heading>
 
       {slice.primary.title?.map((item, index) => (
-        <div key={index} className="ml-6 mt-8 max-w-prose md:ml-12 md:mt-16">
-          
+        <div key={index} className="mt-8 ml-6 max-w-prose md:mt-16 md:ml-12">
           <Heading as="h3" size="sm">
             {item.title}
           </Heading>
@@ -31,7 +30,6 @@ const Experience = ({ slice }: ExperienceProps) => {
           <div className="prose prose-lg prose-invert mt-4">
             <PrismicRichText field={item.description} />
           </div>
-
         </div>
       ))}
     </Bounded>
