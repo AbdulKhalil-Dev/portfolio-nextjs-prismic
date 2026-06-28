@@ -26,7 +26,7 @@ export default function NavBar({
   return (
     <>
       <nav aria-label="Main navigation">
-        <ul className="flex flex-col justify-between rounded-full border-2 border-slate-900/30 bg-slate-100/50 px-6 py-2.5 md:mr-64 md:ml-64 md:flex-row md:items-center md:rounded-full">
+        <ul className="flex flex-col justify-between rounded-full border-2 border-slate-900/30 bg-slate-100/50 px-6 py-2.5 md:mx-[20vw] md:flex-row md:items-center md:rounded-full md:w-auto">
           <div className="flex items-center justify-between">
             <div className="group relative flex cursor-pointer items-center gap-2 select-none">
               <div className="relative flex h-2 w-2 items-center justify-center">
@@ -124,7 +124,7 @@ function DesktopMenu({
   onContactClick: () => void;
 }) {
   return (
-    <div className="relative z-50 hidden flex-row items-center gap-1 bg-transparent py-0 backdrop-blur-md md:flex">
+      <div className="relative z-50 hidden flex-row items-center justify-end gap-1 bg-transparent py-0 backdrop-blur-md md:flex md:flex-1 md:shrink-0">
       {settings?.data?.nav_items?.map(({ link, label }, index) => (
         <React.Fragment key={label}>
           <li>
