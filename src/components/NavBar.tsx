@@ -90,7 +90,7 @@ export default function NavBar({
             <li>
               <button
                 onClick={handleContactClick}
-                className="ml-3 px-6 py-2 bg-slate-900 text-white font-bold rounded-full hover:bg-cyan-300 transition duration-300 shadow-md"
+                className="ml-3 px-6 py-2 bg-slate-900 text-white font-bold rounded-full hover:bg-yellow-300 transition duration-300 shadow-md"
               >
                 {settings.data.cta_label || "Contact"}
               </button>
@@ -151,7 +151,7 @@ function DesktopMenu({
       <li>
         <button
           onClick={onContactClick}
-          className="ml-3 px-6 py-2 bg-cyan-200 text-slate-950 text-sm font-bold rounded-full hover:bg-cyan-400 transition duration-300 shadow-sm cursor-pointer"
+          className="ml-3 px-6 py-2 bg-yellow-200 text-slate-950 text-sm font-bold rounded-full hover:bg-yellow-300 transition duration-300 shadow-sm cursor-pointer"
         >
           {settings.data.cta_label || "Contact"}
         </button>

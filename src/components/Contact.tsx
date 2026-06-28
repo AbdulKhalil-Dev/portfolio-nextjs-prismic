@@ -65,7 +65,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
       <div
         ref={modalRef}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-slate-900 border border-slate-800 p-6 md:p-10 shadow-2xl shadow-cyan-500/10 text-white z-10 opacity-0"
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-slate-900 border border-slate-800 p-6 md:p-10 shadow-2xl shadow-yellow-500/10 text-white z-10 opacity-0"
       >
         {/* Close Button */}
         <button 
@@ -78,7 +78,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">
-            Get In <span className="text-cyan-400">Touch</span>
+            Get In <span className="text-yellow-400">Touch</span>
           </h2>
           <p className="text-gray-400 max-w-md mx-auto text-sm">
             Have a project in mind or want to collaborate? Let's talk
@@ -91,20 +91,20 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <label htmlFor="name" className="block text-sm text-gray-300 mb-1">Your Name</label>
-                <input type="text" id="name" className="w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-4 py-2.5 focus:border-cyan-400 outline-none transition" />
+                <input type="text" id="name" className="w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-4 py-2.5 focus:border-yellow-400 outline-none transition" />
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm text-gray-300 mb-1">Email Address</label>
-                <input type="email" id="email" className="w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-4 py-2.5 focus:border-cyan-400 outline-none transition" />
+                <input type="email" id="email" className="w-full bg-slate-800 border border-slate-700 text-white rounded-lg px-4 py-2.5 focus:border-yellow-400 outline-none transition" />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm text-gray-300 mb-1">Your Message</label>
-                <textarea id="message" className="w-full h-32 bg-slate-800 border border-slate-700 text-white rounded-lg px-4 py-2.5 focus:border-cyan-400 outline-none resize-none transition" />
+                <textarea id="message" className="w-full h-32 bg-slate-800 border border-slate-700 text-white rounded-lg px-4 py-2.5 focus:border-yellow-400 outline-none resize-none transition" />
               </div>
               
-              <button type="submit" className="w-full px-6 py-3 bg-cyan-400 rounded-lg font-semibold text-slate-950 hover:bg-cyan-300 shadow-lg shadow-cyan-400/20 transition duration-300 cursor-pointer">
+              <button type="submit" className="w-full px-6 py-3 bg-yellow-400 rounded-lg font-semibold text-slate-950 hover:bg-yellow-300 shadow-lg shadow-yellow-400/20 transition duration-300 cursor-pointer">
                 Send Message
               </button>
             </form>
@@ -112,7 +112,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
 
           <div className="space-y-4 flex flex-col justify-center h-full">
             <div className="flex items-center bg-slate-800/40 p-4 rounded-xl border border-slate-800/60 shadow-inner">
-              <div className="text-cyan-400 text-xl mr-4 flex-shrink-0"><FaMapMarkerAlt /></div>
+              <div className="text-yellow-400 text-xl mr-4 flex-shrink-0"><FaMapMarkerAlt /></div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-200">Location</h3>
                 <p className="text-sm text-gray-400">Punjab, Pakistan</p>
@@ -120,7 +120,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
             </div>
 
             <div className="flex items-center bg-slate-800/40 p-4 rounded-xl border border-slate-800/60 shadow-inner">
-              <div className="text-cyan-400 text-xl mr-4 flex-shrink-0"><FaEnvelope /></div>
+              <div className="text-yellow-400 text-xl mr-4 flex-shrink-0"><FaEnvelope /></div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-200">Email</h3>
                 <p className="text-sm text-gray-400">khalil.codelab@gmail.com</p>
@@ -128,7 +128,7 @@ const Contact: React.FC<ContactProps> = ({ isOpen, onClose }) => {
             </div>
 
             <div className="flex items-center bg-slate-800/40 p-4 rounded-xl border border-slate-800/60 shadow-inner">
-              <div className="text-cyan-400 text-xl mr-4 flex-shrink-0"><FaPhone /></div>
+              <div className="text-yellow-400 text-xl mr-4 flex-shrink-0"><FaPhone /></div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-200">Phone</h3>
                 <p className="text-sm text-gray-400">+92 3004541151</p>
