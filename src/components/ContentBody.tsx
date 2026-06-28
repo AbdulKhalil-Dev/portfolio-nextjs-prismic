@@ -2,7 +2,6 @@ import { Content, DateField, isFilled } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
-
 import { components } from "@/slices";
 
 export default function ContentBody({
@@ -27,9 +26,9 @@ export default function ContentBody({
   const formattedDate = formatDate(page.data.date);
 
   return (
-    <Bounded as="article">
-      <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
-        <Heading as="h1">{page.data.title}</Heading>
+    <Bounded as="article" className="[&>div]:max-w-4xl">
+      <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-6 py-10 md:px-16 md:py-20">
+        <Heading as="h1" size="md">{page.data.title}</Heading>
         <div className="flex gap-4 text-yellow-400 text-xl font-bold">
           {page.tags.map((tag) => (
             <span key={tag}>{tag}</span>

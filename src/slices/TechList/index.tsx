@@ -13,19 +13,13 @@ import Bounded from "@/components/Bounded";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Props for `TechList`.
- */
 export type TechListProps = SliceComponentProps<Content.TechListSlice>;
 
-/**
- * Component for "TechList" Slices.
- */
 const TechList: FC<TechListProps> = ({ slice }) => {
   const components = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: components.current,
@@ -50,11 +44,12 @@ const TechList: FC<TechListProps> = ({ slice }) => {
               ? gsap.utils.random(-600, -400)
               : gsap.utils.random(600, 400);
           },
-          ease: "power1.inOut"
+          ease: "power1.inOut",
         },
       );
     }, components);
-    return () => ctx.revert(); // cleanup func
+
+    return () => ctx.revert();
   }, []);
 
   return (
