@@ -26,12 +26,12 @@ export default function NavBar({
   return (
     <>
       <nav aria-label="Main navigation">
-        <ul className="flex flex-col justify-between rounded-full border-2 border-slate-900/30 bg-slate-100 px-6 py-2.5 md:m-4 md:flex-row md:items-center md:rounded-full">
+        <ul className="flex flex-col justify-between rounded-full border-2 border-slate-900/30 bg-slate-100/50 px-6 py-2.5 md:mr-64 md:ml-64 md:flex-row md:items-center md:rounded-full">
           <div className="flex items-center justify-between">
             <div className="group relative flex cursor-pointer items-center gap-2 select-none">
               <div className="relative flex h-2 w-2 items-center justify-center">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75"></span>
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-600 shadow-[0_0_8px_#c2410c]"></span>
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-600 drop-shadow-[0_0_8px_#c2410c]"></span>
               </div>
 
               <div className="text-xl font-black tracking-wider text-slate-100 transition-colors duration-300 group-hover:text-orange-500 [&&_p]:m-0">
@@ -58,7 +58,7 @@ export default function NavBar({
             <button
               aria-label="Close menu"
               aria-expanded={open}
-              className="fixed top-5 right-6 block rounded-xl border-2 border-slate-900/30 p-0.5 text-2xl text-red-700 md:hidden"
+              className="fixed top-5 right-6 block rounded-xl border-2 border-slate-900/30 p-0.5 text-2xl text-red-500 md:hidden"
               onClick={() => setOpen(false)}
             >
               <MdClose />
@@ -74,7 +74,7 @@ export default function NavBar({
                   >
                     <span
                       className={clsx(
-                        "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
+                        "absolute inset-0 z-0 h-full translate-y-12 rounded bg-orange-400 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                         pathname.includes(asLink(link) as string) ? "translate-y-6" : "translate-y-16",
                       )}
                     />
@@ -90,7 +90,7 @@ export default function NavBar({
             <li>
               <button
                 onClick={handleContactClick}
-                className="ml-3 px-6 py-2 bg-slate-900 text-white font-bold rounded-full hover:bg-yellow-300 transition duration-300 shadow-md"
+                className="ml-3 px-6 py-2 bg-slate-900 text-white font-bold rounded-full hover:bg-orange-500 transition duration-300 shadow-md"
               >
                 {settings.data.cta_label || "Contact"}
               </button>
@@ -135,7 +135,7 @@ function DesktopMenu({
             >
               <span
                 className={clsx(
-                  "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
+                  "absolute inset-0 z-0 h-full rounded bg-orange-400 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                   pathname.includes(asLink(link) as string) ? "translate-y-6" : "translate-y-8",
                 )}
               />
@@ -151,7 +151,7 @@ function DesktopMenu({
       <li>
         <button
           onClick={onContactClick}
-          className="ml-3 px-6 py-2 bg-yellow-200 text-slate-950 text-sm font-bold rounded-full hover:bg-yellow-300 transition duration-300 shadow-sm cursor-pointer"
+          className="ml-3 px-6 py-2 bg-orange-400 text-slate-950 text-sm font-bold rounded-full hover:bg-orange-400 transition duration-300 shadow-sm cursor-pointer"
         >
           {settings.data.cta_label || "Contact"}
         </button>

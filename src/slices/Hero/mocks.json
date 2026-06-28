@@ -12,6 +12,17 @@
 				"__TYPE__": "FieldContent",
 				"type": "Text",
 				"value": "Khalil"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ipsum nulla ex quis aliqua reprehenderit reprehenderit eu ullamco eu dolore laboris sunt sunt laborum sunt. Veniam labore amet irure tempor sit dolor non tempor labore fugiat non ullamco. Deserunt adipisicing non adipisicing Lorem minim sint pariatur proident aute."
+						}
+					}
+				]
 			}
 		},
 		"items": []

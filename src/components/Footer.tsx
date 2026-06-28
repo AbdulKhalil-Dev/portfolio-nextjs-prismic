@@ -11,7 +11,7 @@ export default async function Footer() {
   const client = createClient();
   const settings = await client.getSingle("settings");
 
-const socialLinkClass = "flex h-9 w-9 items-center justify-center text-xl text-slate-300 border border-slate-700 rounded-full transition-all duration-150 hover:scale-110 hover:text-yellow-400 hover:border-yellow-400 mx-1.5";
+const socialLinkClass = "flex h-9 w-9 items-center justify-center text-xl text-slate-300 bg-gray-500/30 text-slate-100 border border-slate-00 rounded-full transition-all duration-150 hover:scale-110 hover:text-orange-500 hover:border-orange-500 mx-1.5";
 
   return (
     <Bounded as="footer" className="text-slate-600">
@@ -19,7 +19,7 @@ const socialLinkClass = "flex h-9 w-9 items-center justify-center text-xl text-s
         <div className="name flex flex-col items-center justify-center gap-x-4 gap-y-2 sm:flex-row sm:justify-self-start">
           <Link
             href="/"
-            className="text-xl font-extrabold tracking-tighter text-slate-100 transition-colors duration-150 hover:text-yellow-400"
+            className="text-xl font-extrabold tracking-tighter text-slate-100 transition-colors duration-150 hover:text-orange-500"
           >
             {settings.data.name}
           </Link>
@@ -40,7 +40,7 @@ const socialLinkClass = "flex h-9 w-9 items-center justify-center text-xl text-s
               <React.Fragment key={label}>
                 <li>
                   <PrismicNextLink
-                    className="group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-100 transition-colors duration-150 hover:text-yellow-400"
+                    className="group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-100 transition-colors duration-150 hover:text-orange-500"
                     field={link}
                   >
                     {label}

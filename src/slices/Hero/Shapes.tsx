@@ -3,7 +3,7 @@
 import * as THREE from "three";
 import { Canvas, ThreeEvent } from "@react-three/fiber";
 import { ContactShadows, Float } from "@react-three/drei";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 export default function Shapes() {
@@ -39,75 +39,21 @@ export default function Shapes() {
 }
 
 function Geometries() {
-  const { geometries, materials } = useMemo(() => {
-    const geoms = [
-      new THREE.IcosahedronGeometry(3),
-      new THREE.CapsuleGeometry(0.5, 1.5, 2, 16),
-      new THREE.OctahedronGeometry(1.5),
-      new THREE.TorusGeometry(0.6, 0.25, 16, 32),
-      new THREE.DodecahedronGeometry(1.5),
-    ];
-
-    const mats = [
-      new THREE.MeshStandardMaterial({
-        color: 0x44ff6f,
-        roughness: 0.03,
-        metalness: 0.4,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0xf00a0a,
-        roughness: 0.01,
-        metalness: 0.3,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0xf1c40f,
-        roughness: 0.05,
-        metalness: 0.3,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0xdd44fc,
-        roughness: 0.05,
-        metalness: 0.3,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0xf39c12,
-        roughness: 0.01,
-        metalness: 0.3,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0x1abc9c,
-        roughness: 0.2,
-        metalness: 0.3,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0xb5d471,
-        roughness: 0.01,
-        metalness: 0.2,
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0xa4b0be,
-        roughness: 0.5,
-        metalness: 1,
-      }),
-    ];
-
-    return { geometries: geoms, materials: mats };
-  }, []);
-
+  // Component unmount hone par memory clear karne ke liye cleanup
   useEffect(() => {
     return () => {
-      geometries.forEach((g) => g.dispose());
-      materials.forEach((m) => m.dispose());
+      STATIC_GEOMETRIES.forEach((g) => g.dispose());
+      STATIC_MATERIALS.forEach((m) => m.dispose());
     };
-  }, [geometries, materials]);
+  }, []);
 
   return SHAPES_CONFIG.map(({ position, r, geometryIndex }) => {
     return (
       <Geometry
         key={geometryIndex}
         position={[position[0] * 2, position[1] * 2, position[2] * 2]}
-        geometry={geometries[geometryIndex]}
-        materials={materials}
+        geometry={STATIC_GEOMETRIES[geometryIndex]}
+        materials={STATIC_MATERIALS}
         r={r}
       />
     );
@@ -198,26 +144,29 @@ function Geometry({ r, position, geometry, materials }: GeometryProps) {
   );
 }
 
+const STATIC_GEOMETRIES = [
+  new THREE.IcosahedronGeometry(3),
+  new THREE.CapsuleGeometry(0.5, 1.5, 2, 16),
+  new THREE.OctahedronGeometry(1.5),
+  new THREE.TorusGeometry(0.6, 0.25, 16, 32),
+  new THREE.DodecahedronGeometry(1.5),
+];
+
+const STATIC_MATERIALS = [
+  new THREE.MeshStandardMaterial({ color: 0x44ff6f, roughness: 0.03, metalness: 0.4 }),
+  new THREE.MeshStandardMaterial({ color: 0xf00a0a, roughness: 0.01, metalness: 0.3 }),
+  new THREE.MeshStandardMaterial({ color: 0xf1c40f, roughness: 0.05, metalness: 0.3 }),
+  new THREE.MeshStandardMaterial({ color: 0xdd44fc, roughness: 0.05, metalness: 0.3 }),
+  new THREE.MeshStandardMaterial({ color: 0xf39c12, roughness: 0.01, metalness: 0.3 }),
+  new THREE.MeshStandardMaterial({ color: 0x1abc9c, roughness: 0.2, metalness: 0.3 }),
+  new THREE.MeshStandardMaterial({ color: 0xb5d471, roughness: 0.01, metalness: 0.2 }),
+  new THREE.MeshStandardMaterial({ color: 0xa4b0be, roughness: 0.5, metalness: 1 }),
+];
+
 const SHAPES_CONFIG = [
   { position: [0, 0, 0] as [number, number, number], r: 1, geometryIndex: 0 },
-  {
-    position: [1, -0.75, 4] as [number, number, number],
-    r: 1.3,
-    geometryIndex: 1,
-  },
-  {
-    position: [-1.4, 2, -4] as [number, number, number],
-    r: 1.5,
-    geometryIndex: 2,
-  },
-  {
-    position: [-0.8, -0.75, 5] as [number, number, number],
-    r: 1.7,
-    geometryIndex: 3,
-  },
-  {
-    position: [1.6, 1.6, -4] as [number, number, number],
-    r: 1.9,
-    geometryIndex: 4,
-  },
+  { position: [1, -0.75, 4] as [number, number, number], r: 1.3, geometryIndex: 1 },
+  { position: [-1.4, 2, -4] as [number, number, number], r: 1.5, geometryIndex: 2 },
+  { position: [-0.8, -0.75, 5] as [number, number, number], r: 1.7, geometryIndex: 3 },
+  { position: [1.6, 1.6, -4] as [number, number, number], r: 1.9, geometryIndex: 4 },
 ];
