@@ -1,6 +1,4 @@
 import { createClient } from "@/prismicio";
-import { PrismicNextLink } from "@prismicio/next";
-import Link from "next/link";
 import React from "react";
 import NavBar from "@/components/NavBar";
 

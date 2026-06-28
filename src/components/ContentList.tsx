@@ -133,7 +133,7 @@ export default function ContentList({
                     <span className="text-3xl font-bold">
                       {item.data.title}
                     </span>
-                    <div className="flex gap-3 text-yellow-400 text-lg font-bold">
+                    <div className="flex gap-3 text-orange-400 text-lg font-bold">
                       {item.tags.map((tag, tagIndex) => (
                         <span key={tagIndex}>{tag}</span>
                       ))}
