@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Urbanist } from "next/font/google"; 
 import "./globals.css";
 import Header from "@/components/Header";
 import CustomCursor from "@/components/CustomCursor";
@@ -6,6 +7,12 @@ import LoadingBar from "@/components/LoadingBar";
 import Footer from "@/components/Footer";
 import { PrismicPreview } from "@prismicio/next";
 import { createClient, repositoryName } from "@/prismicio"; 
+
+const urbanist = Urbanist({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const viewport = {
   width: "device-width",
@@ -38,10 +45,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" data-scroll-behavior="smooth" className="bg-slate-900 text-slate-100">
+    <html lang="en" translate="no" data-scroll-behavior="smooth" className={`${urbanist.className} bg-slate-900 text-slate-100`}>
       <body
         className="antialiased relative min-h-screen"
-        style={{ fontFamily: "'Urbanist', sans-serif" }}
         suppressHydrationWarning
       >
         <LoadingBar />

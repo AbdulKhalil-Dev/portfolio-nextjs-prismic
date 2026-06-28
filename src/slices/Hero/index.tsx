@@ -99,7 +99,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     return name.split("").map((letter, index) => (
       <span
         key={index}
-        className={`name-animation name-animation-${key} inline-block opacity-0 will-change-transform`}
+        className={`name-animation name-animation-${key} inline-block opacity-0`}
       >
         {letter}
       </span>
@@ -112,11 +112,10 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       ref={component}
     >
-      <div className="grid min-h-[70vh] grid-cols-1 md:grid-cols-2 items-center">
-        <Shapes />
-        <div className="col-start-1 md:row-start-1 flex flex-col items-center text-center">
+      <div className="grid min-h-[70vh] grid-cols-1 items-center gap-4 md:grid-cols-2">
+        <div className="order-2 col-start-1 flex flex-col items-center text-center md:order-1">
           <h1
-            className="mb-8 text-[clamp(3rem,20vmin,20rem)] font-extrabold leading-none tracking-tighter whitespace-nowrap"
+            className="mb-8 text-[clamp(3rem,20vmin,20rem)] leading-none font-extrabold tracking-tighter whitespace-nowrap"
             aria-label={`${slice.primary.first_name || ""} ${slice.primary.last_name || ""}`}
           >
             <span className="block text-slate-300">
@@ -126,12 +125,16 @@ const Hero: FC<HeroProps> = ({ slice }) => {
               {renderLetters(slice.primary.last_name, "last")}
             </span>
           </h1>
-          <span className="min-h-[40px] block bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 bg-clip-text text-xl font-bold uppercase tracking-[.2em] text-transparent md:text-2xl">
+          <span className="block min-h-[40px] bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 bg-clip-text text-xl font-bold tracking-[.2em] text-transparent uppercase md:text-2xl">
             <span ref={typewriterRef}></span>
-            <span className="animate-pulse text-slate-100 ml-0.5 font-normal">
+            <span className="ml-0.5 animate-pulse font-normal text-slate-100">
               |
             </span>
           </span>
+        </div>
+
+        <div className="order-1 md:order-2">
+          <Shapes />
         </div>
       </div>
     </Bounded>
