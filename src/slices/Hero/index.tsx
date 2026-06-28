@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useRef, useMemo, useState } from "react";
+import { FC, useEffect, useRef, useMemo } from "react";
 import { Content, KeyTextField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { PrismicRichText } from "@prismicio/react";
@@ -22,7 +22,6 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 const Hero: FC<HeroProps> = ({ slice }) => {
   const component = useRef<HTMLDivElement>(null);
   const typewriterRef = useRef<HTMLSpanElement>(null);
-  const [canLoadShapes, setCanLoadShapes] = useState(false);
 
   const words = useMemo(() => {
     return [
@@ -36,12 +35,8 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setCanLoadShapes(true), 800);
-
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
-
-      gsap.set(".name-animation", { willChange: "transform, opacity" });
 
       tl.fromTo(
         ".name-animation",
@@ -53,8 +48,8 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           ease: "elastic.out(1,0.3)",
           duration: 1,
           transformOrigin: "left top",
-          delay: 0.3,
-          stagger: { each: 0.05, from: "random" },
+          delay: 0.5,
+          stagger: { each: 0.1, from: "random" },
           clearProps: "willChange",
         },
       );
@@ -62,8 +57,8 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       tl.fromTo(
         ".desc-animation",
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-        "-=0.4",
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        "-=0.3",
       );
 
       if (typewriterRef.current) {
@@ -71,24 +66,20 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         words.forEach((word) => {
           typewriterTl
             .to(typewriterRef.current, {
-              duration: word.length * 0.06,
+              duration: word.length * 0.08,
               text: word,
               ease: "none",
             })
             .to({}, { duration: 1.5 })
             .to(typewriterRef.current, {
-              duration: word.length * 0.03,
+              duration: word.length * 0.04,
               text: "",
               ease: "none",
             });
         });
       }
     }, component);
-
-    return () => {
-      clearTimeout(timer);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, [words]);
 
   const renderLetters = (name: KeyTextField, key: string) => {
@@ -135,31 +126,17 @@ const Hero: FC<HeroProps> = ({ slice }) => {
               </div>
             </div>
           )}
-          <div className="desc-animation mt-6 opacity-0">
+          <div className="desc-animation mt-8 opacity-0">
             <Link
-              href="/project"
-              className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-8 py-3 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:gap-3 hover:bg-orange-600 hover:drop-shadow-[0_0_12px_rgba(249,115,22,0.5)]"
+              href="/projects"
+              className="rounded-full bg-orange-500 px-8 py-3 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:bg-orange-600 hover:drop-shadow-[0_0_6px_rgba(249,115,22,0.3)]"
             >
               View Projects
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 transition-transform duration-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
             </Link>
           </div>
         </div>
-        <div className="order-1 md:order-2 md:pl-0">
-          {canLoadShapes ? <Shapes /> : <div className="h-[500px] w-full" />}
+        <div className="order-1 md:order-2">
+          <Shapes />
         </div>
       </div>
     </Bounded>
