@@ -15,89 +15,132 @@ export default function NavBar({
   settings: Content.SettingsDocument;
 }) {
   const [open, setOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false); 
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const pathname = usePathname();
 
   const handleContactClick = () => {
-    setOpen(false); 
+    setOpen(false);
     setIsContactOpen(true);
   };
 
   return (
     <>
-      <nav aria-label="Main navigation">
-        <ul className="flex flex-col justify-between rounded-full border-2 border-slate-900/30 bg-slate-100/50 px-6 py-2.5 md:mx-[20vw] md:flex-row md:items-center md:rounded-full md:w-auto">
-          <div className="flex items-center justify-between">
-            <div className="group relative flex cursor-pointer items-center gap-2 select-none">
-              <div className="relative flex h-2 w-2 items-center justify-center">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-500 opacity-75"></span>
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange-600 drop-shadow-[0_0_8px_#c2410c]"></span>
-              </div>
-
-              <div className="text-xl font-black tracking-wider text-slate-100 transition-colors duration-300 group-hover:text-orange-500 [&&_p]:m-0">
-                <NameLogo name={settings.data.name} />
-              </div>
+      <nav
+        aria-label="Main navigation"
+        className="sticky top-0 z-50 w-full"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(39,52,104,0.60) 0%, rgba(57,75,151,0.50) 100%)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <ul className="flex flex-row items-center justify-between px-6 py-3 md:mx-auto md:w-full md:max-w-4xl">
+          <div className="flex items-center gap-2">
+            <div className="relative flex h-2 w-2 items-center justify-center">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-600 drop-shadow-[0_0_8px_#16a34a]"></span>
             </div>
-            <button
-              aria-expanded={open}
-              aria-label="Open menu"
-              className="block p-2 text-2xl text-slate-800 md:hidden"
-              onClick={() => setOpen(true)}
-            >
-              <MdMenu />
-            </button>
+            <NameLogo name={settings.data.name} />
           </div>
-          
-          {/* Mobile Menu */}
+
+          <button
+            aria-expanded={open}
+            aria-label="Open menu"
+            className="flex items-center justify-center p-2 text-2xl text-white md:hidden"
+            onClick={() => setOpen(true)}
+          >
+            <MdMenu />
+          </button>
+
           <div
             className={clsx(
-              "fixed top-0 right-0 bottom-0 left-0 z-50 flex flex-col items-center justify-center gap-6 bg-gradient-to-br from-blue-500/50 via-gray-100/70 to-gray-300/80 pt-0 pr-0 backdrop-blur-md transition-transform duration-300 ease-in-out md:hidden",
-              open ? "translate-x-0" : "translate-x-[100%]",
+              "fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300 md:hidden",
+              open
+                ? "pointer-events-auto opacity-100"
+                : "pointer-events-none opacity-0",
             )}
+            onClick={() => setOpen(false)}
+          />
+
+          <div
+            className={clsx(
+              "fixed top-0 right-0 bottom-0 z-50 flex w-72 flex-col px-8 pt-16 pb-10 md:hidden",
+              "transition-transform duration-300 ease-in-out",
+              open ? "translate-x-0" : "translate-x-full",
+            )}
+            style={{
+              background:
+                "linear-gradient(160deg, rgba(39,52,104,0.98) 0%, rgba(57,75,151,0.98) 100%)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              borderLeft: "1px solid rgba(255,255,255,0.1)",
+              boxShadow: "-8px 0 32px rgba(0,0,0,0.5)",
+            }}
           >
             <button
               aria-label="Close menu"
-              aria-expanded={open}
-              className="fixed top-5 right-6 block rounded-xl border-2 border-slate-900/30 p-0.5 text-2xl text-red-500 md:hidden"
+              className={clsx(
+                "absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full text-xl text-white",
+                "bg-white/10 transition-all duration-300 hover:bg-white/20",
+                open
+                  ? "scale-100 opacity-100"
+                  : "pointer-events-none scale-75 opacity-0",
+              )}
               onClick={() => setOpen(false)}
             >
               <MdClose />
             </button>
-            {settings?.data?.nav_items?.map(({ link, label }, index) => (
-              <React.Fragment key={label}>
-                <li className="first:mt-8">
+
+            <div className="mt-4 flex flex-col gap-2">
+              {settings?.data?.nav_items?.map(({ link, label }) => (
+                <li key={label} className="list-none">
                   <PrismicNextLink
-                    className="group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-900"
+                    className={clsx(
+                      "group/link relative flex w-full items-center justify-between py-2 text-xl font-bold text-white",
+                      "transition-colors duration-200 hover:text-orange-400",
+                    )}
                     field={link}
                     onClick={() => setOpen(false)}
-                    aria-current={pathname.includes(asLink(link) as string) ? "page" : undefined}
+                    aria-current={
+                      pathname.includes(asLink(link) as string)
+                        ? "page"
+                        : undefined
+                    }
                   >
+                    {label}
                     <span
                       className={clsx(
-                        "absolute inset-0 z-0 h-full translate-y-12 rounded bg-orange-400 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
-                        pathname.includes(asLink(link) as string) ? "translate-y-6" : "translate-y-16",
+                        "relative flex h-3 w-3 items-center justify-center opacity-0 transition-all duration-300",
+                        "group-hover/link:opacity-100",
+                        pathname.includes(asLink(link) as string) &&
+                          "opacity-100",
                       )}
-                    />
-                    <span className="relative">{label}</span>
+                    >
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-orange-500 drop-shadow-[0_0_6px_#f97316]" />
+                    </span>
                   </PrismicNextLink>
                 </li>
-                {index < (settings?.data?.nav_items?.length ?? 0) - 1 && (
-                  <span className="hidden text-4xl leading-[0] font-thin text-slate-400 md:inline" aria-hidden="true">/</span>
-                )}
-              </React.Fragment>
-            ))}
-            
-            <li>
+              ))}
+            </div>
+
+            <div className="mt-auto">
               <button
                 onClick={handleContactClick}
-                className="ml-3 px-6 py-2 bg-slate-900 text-white font-bold rounded-full hover:bg-orange-500 transition duration-300 shadow-md"
+                className="w-full rounded-full bg-orange-500 px-6 py-2.5 text-sm font-bold text-white shadow-md transition duration-300 hover:bg-orange-600"
               >
                 {settings.data.cta_label || "Contact"}
               </button>
-            </li>
+            </div>
           </div>
-          
-          <DesktopMenu settings={settings} pathname={pathname} onContactClick={handleContactClick} />
+
+          <DesktopMenu
+            settings={settings}
+            pathname={pathname}
+            onContactClick={handleContactClick}
+          />
         </ul>
       </nav>
 
@@ -108,7 +151,11 @@ export default function NavBar({
 
 function NameLogo({ name }: { name: KeyTextField }) {
   return (
-    <Link href="/" aria-label="Home page" className="text-xl font-extrabold tracking-tighter text-slate-900">
+    <Link
+      href="/"
+      aria-label="Home page"
+      className="text-xl font-extrabold tracking-tighter text-white transition-colors duration-200 hover:text-orange-400"
+    >
       {name}
     </Link>
   );
@@ -124,34 +171,46 @@ function DesktopMenu({
   onContactClick: () => void;
 }) {
   return (
-      <div className="relative z-50 hidden flex-row items-center justify-end gap-1 bg-transparent py-0 backdrop-blur-md md:flex md:flex-1 md:shrink-0">
+    <div className="hidden flex-row items-center justify-end gap-1 md:flex md:flex-1 md:shrink-0">
       {settings?.data?.nav_items?.map(({ link, label }, index) => (
         <React.Fragment key={label}>
-          <li>
+          <li className="list-none">
             <PrismicNextLink
-              className="group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-900"
+              className={clsx(
+                "group relative block overflow-hidden px-3 py-1 text-base font-bold text-white",
+                "transition-colors duration-200 hover:text-orange-400",
+              )}
               field={link}
-              aria-current={pathname.includes(asLink(link) as string) ? "page" : undefined}
+              aria-current={
+                pathname.includes(asLink(link) as string) ? "page" : undefined
+              }
             >
               <span
                 className={clsx(
-                  "absolute inset-0 z-0 h-full rounded bg-orange-400 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
-                  pathname.includes(asLink(link) as string) ? "translate-y-6" : "translate-y-8",
+                  "absolute bottom-0 left-0 h-[2px] bg-orange-500 transition-all duration-300",
+                  pathname.includes(asLink(link) as string)
+                    ? "w-full"
+                    : "w-0 group-hover:w-full",
                 )}
               />
-              <span className="relative">{label}</span>
+              {label}
             </PrismicNextLink>
           </li>
           {index < (settings?.data?.nav_items?.length ?? 0) - 1 && (
-            <span className="hidden text-4xl leading-[0] font-thin text-slate-400 md:inline" aria-hidden="true">/</span>
+            <span
+              className="hidden text-2xl leading-[0] font-thin text-white/30 md:inline"
+              aria-hidden="true"
+            >
+              /
+            </span>
           )}
         </React.Fragment>
       ))}
-      
-      <li>
+
+      <li className="list-none">
         <button
           onClick={onContactClick}
-          className="ml-3 px-6 py-2 bg-orange-400 text-slate-950 text-sm font-bold rounded-full hover:bg-orange-400 transition duration-300 shadow-sm cursor-pointer"
+          className="ml-3 cursor-pointer rounded-full bg-orange-500 px-6 py-2 text-sm font-bold text-white shadow-sm transition duration-300 hover:bg-orange-600"
         >
           {settings.data.cta_label || "Contact"}
         </button>
