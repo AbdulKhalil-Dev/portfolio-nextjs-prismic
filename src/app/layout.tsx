@@ -21,7 +21,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Abdul Khalil | Creative Developer",
+  title: "Abdul Khalil | Creative Frontend Developer",
   description:
     "Creative Frontend Developer specializing in 3D web experiences, interactive React/Next.js applications, and high-performance user interfaces.",
   metadataBase: new URL("https://abdulkhalildev.vercel.app"),
@@ -47,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" translate="no" data-scroll-behavior="smooth" className={`${urbanist.className} bg-slate-900 text-slate-100`}>
       <body
-        className="antialiased relative min-h-screen"
+        className="antialiased relative overflow-x-hidden"
         suppressHydrationWarning
       >
         <LoadingBar />
