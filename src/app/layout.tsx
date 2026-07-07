@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" translate="no" data-scroll-behavior="smooth" className={`${urbanist.className} bg-slate-900 text-slate-100`}>
+    <html lang="en" translate="no" data-scroll-behavior="smooth" className={`${urbanist.className} bg-slate-900 text-slate-100 overflow-x-hidden`}>
       <body
         className="antialiased relative overflow-x-hidden"
         suppressHydrationWarning

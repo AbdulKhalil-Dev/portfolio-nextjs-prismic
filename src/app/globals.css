@@ -8,7 +8,7 @@ html {
 .background-gradient {
   background: radial-gradient(
     circle at top center,
-    hsla(230, 100%, 60%, 0.5) 0%,
+    hsla(100, 100%, 60%, 0.5) 0%,
     hsla(222, 0%, 0%, 0) 50%,
     hsla(222, 0%, 0%, 0) 100%
   );
